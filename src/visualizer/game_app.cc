@@ -11,6 +11,8 @@ GameApp::GameApp() {
 void GameApp::draw() {
   ci::Color background_color("white");
   ci::gl::clear(background_color);
+  ci::gl::color(ci::Color(game_status_.kBorderColor));
+  ci::gl::drawStrokedRect(ci::Rectf(game_status_.kTopLeft, game_status_.kBottomRight));
 }
 
 void GameApp::keyDown(ci::app::KeyEvent event) {

@@ -2,21 +2,8 @@
 
 namespace finalproject {
     
-Player::Player() {}
-
-Player::Player(ci::Color color) {
-  color_ = color;
+Player::Player() {
   score_ = 0;
-  if (color == kRed) {
-    curr_position_ = kRedStart;
-    direction_ = RIGHT;
-  } else if (color == kBlue) {
-    curr_position_ = kBlueStart;
-    direction_ = LEFT;
-  } else {
-    //throw std::invalid_argument("Illegal color");
-    std::cout << "Got here" << std::endl;
-  }
 }
 
 void Player::MoveLeft() {
@@ -39,45 +26,20 @@ void Player::MoveDown() {
   direction_ = DOWN;
 }
 
-Player::Player(const Player &source) {
-  curr_position_ = source.curr_position_;
-  score_ = source.score_;
-  color_ = source.color_;
-  direction_ = source.direction_;
+void Player::SetCurrPosition(const glm::vec2 &position) {
+  curr_position_ = position;
 }
 
-Player::Player(Player &&source) noexcept {
-  curr_position_ = source.curr_position_;
-  score_ = source.score_;
-  color_ = source.color_;
-  direction_ = source.direction_;
-  source.curr_position_ = glm::vec2(0, 0);
-  source.score_ = 0;
-  source.color_ = nullptr;
-  direction_ = UP;
+void Player::SetScore(const size_t &score) {
+  score_ = score;
 }
 
-Player &Player::operator=(const Player &source) {
-  curr_position_ = source.curr_position_;
-  score_ = source.score_;
-  color_ = source.color_;
-  return *this;
+void Player::SetColor(const cinder::Color &color) {
+  color_ = color;
 }
 
-Player &Player::operator=(Player &&source) noexcept {
-  curr_position_ = source.curr_position_;
-  score_ = source.score_;
-  color_ = source.color_;
-  source.curr_position_ = glm::vec2(0, 0);
-  source.score_ = 0;
-  source.color_ = nullptr;
-  return *this;
-}
-
-Player::~Player() {
-  curr_position_ = glm::vec2(0, 0);
-  score_ = 0;
-  color_ = ci::Color();
+void Player::SetDirection(const Player::Direction &direction) {
+  direction_ = direction;
 }
 
 }
