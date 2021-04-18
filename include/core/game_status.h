@@ -13,7 +13,9 @@ public:
   /** Initializes the game with the blue and red player. */
   GameStatus();
   
-  
+  /** Getters and Setters */
+  Player GetRedPlayer() const;
+  Player GetBluePlayer() const;
   
 private:
   Player player_red_;

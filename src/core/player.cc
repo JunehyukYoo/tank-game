@@ -42,4 +42,20 @@ void Player::SetDirection(const Player::Direction &direction) {
   direction_ = direction;
 }
 
+ci::Color Player::GetColor() const {
+  return color_;
+}
+
+glm::vec2 Player::GetCurrPosition() const {
+  return curr_position_;
+}
+
+size_t Player::GetScore() const {
+  return score_;
+}
+
+Player::Direction Player::GetDirection() const {
+  return direction_;
+}
+
 }

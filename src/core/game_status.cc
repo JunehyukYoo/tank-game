@@ -14,4 +14,12 @@ GameStatus::GameStatus() {
   blue_shot_ = false;
 }
 
+Player GameStatus::GetRedPlayer() const {
+  return player_red_;
+}
+
+Player GameStatus::GetBluePlayer() const {
+  return player_blue_;
+}
+
 } // namespace finalproject
