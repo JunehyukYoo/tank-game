@@ -13,8 +13,12 @@ void GameApp::draw() {
   ci::gl::clear(background_color);
   ci::gl::color(ci::Color(game_status_.kBorderColor));
   ci::gl::drawStrokedRect(ci::Rectf(game_status_.kTopLeft, game_status_.kBottomRight));
+  
   ci::gl::color(game_status_.GetRedPlayer().GetColor());
-  ci::gl::drawSolidRect(ci::Rectf(glm::vec2(105, 105), glm::vec2(120, 120)));
+  ci::gl::drawSolidRect(ci::Rectf(glm::vec2(game_status_.GetRedPlayer().GetCurrPosition()),
+                                  glm::vec2(game_status_.GetRedPlayer().GetCurrPosition().x + 50,
+                                            game_status_.GetRedPlayer().GetCurrPosition().y + 50)));
+  
   ci::gl::color(game_status_.GetBluePlayer().GetColor());
   ci::gl::drawSolidRect(ci::Rectf(game_status_.GetBluePlayer().GetCurrPosition(),
                                   glm::vec2(game_status_.GetBluePlayer().GetCurrPosition().x - 5,
