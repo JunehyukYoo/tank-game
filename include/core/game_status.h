@@ -1,6 +1,8 @@
 #pragma once
 #include <glm/vec2.hpp>
+#include <vector>
 #include "player.h"
+#include "bullet.h"
 
 namespace finalproject {
 /** Represents the current status of the game */
@@ -13,15 +15,27 @@ public:
   /** Initializes the game with the blue and red player. */
   GameStatus();
   
+  /**
+   * Method to shoot a bullet.
+   * @param player The player who shot the bullet.
+   */
+  void ShootBullet(const Player& player);
+  
+  /**
+   * Advances one frame within the game. Used for bullet trajectory calculation.
+   */
+  void AdvanceOneFrame();
+  
+  void CheckContainerContact();
+  
   /** Getters and Setters */
-  Player GetRedPlayer() const;
-  Player GetBluePlayer() const;
+  Player GetRedPlayer();
+  Player GetBluePlayer();
   
 private:
   Player player_red_;
   Player player_blue_;
-  bool red_shot_;
-  bool blue_shot_;
+  std::vector<Bullet> bullets_in_game_;
 
   const glm::vec2 kRedStart = glm::vec2(105, 105);
   const glm::vec2 kBlueStart = glm::vec2(595, 595);

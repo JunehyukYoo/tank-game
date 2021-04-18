@@ -14,7 +14,7 @@ public:
   GameApp();
 
   void draw() override;
-
+  void update() override;
   void keyDown(ci::app::KeyEvent event) override;
 
   const double kWindowSize = 875;
