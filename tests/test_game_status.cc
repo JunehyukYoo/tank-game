@@ -8,6 +8,26 @@ TEST_CASE("Sanity check") {
   REQUIRE(1 < 2);
 }
 
+TEST_CASE("Testing player spawning") {
+  finalproject::GameStatus game;
+  
+  SECTION("Red player") {
+    finalproject::Player red_player = game.GetRedPlayer();
+    REQUIRE(red_player.GetColor() == ci::Color("red"));
+    REQUIRE(red_player.GetDirection() == finalproject::Player::Direction::RIGHT);
+    REQUIRE(red_player.GetScore() == 0);
+    REQUIRE(red_player.GetCurrPosition() == glm::vec2(105, 105));
+  }
+
+  SECTION("Blue player") {
+    finalproject::Player blue_player = game.GetBluePlayer();
+    REQUIRE(blue_player.GetColor() == ci::Color("blue"));
+    REQUIRE(blue_player.GetDirection() == finalproject::Player::Direction::LEFT);
+    REQUIRE(blue_player.GetScore() == 0);
+    REQUIRE(blue_player.GetCurrPosition() == glm::vec2(595, 595));
+  }
+}
+
 TEST_CASE("Testing general bullet functionality") {
   finalproject::GameStatus game;
   finalproject::Player player;
