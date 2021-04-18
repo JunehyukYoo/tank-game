@@ -23,11 +23,18 @@ public:
    */
   void CalculateVelocityFromDirection(Player::Direction direction);
   
+  /** Getters and setters */
+  glm::vec2 GetPosition();
+  glm::vec2 GetVelocity();
+  ci::Color GetColor() const;
+  float GetRadius() const;
+  
+  
 private:
   glm::vec2 position_;
   glm::vec2 velocity_;
   ci::Color color_;
-  size_t radius_;
+  float radius_;
   
   const float kDefaultLaunchSpeed = 10;
   const float kDefaultRadius = 5;

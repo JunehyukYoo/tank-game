@@ -9,7 +9,8 @@ namespace finalproject {
 class Player {
   
 public:
-  const size_t kTankDimensions = 15;
+  constexpr static const float kTankDimensions = 15;
+  constexpr static const float kMoveStep = 5;
   
   /** Enum for direction the tank is currently pointing. Includes: UP, DOWN, LEFT, RIGHT */
   enum Direction {
@@ -43,9 +44,6 @@ private:
   size_t score_;
   ci::Color color_;
   Direction direction_;
-  
-  const size_t kMoveStep = 2;
-  const std::string kTankImagePath = "";
 };
 
 } // namespace finalproject

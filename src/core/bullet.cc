@@ -26,4 +26,20 @@ void Bullet::CalculateVelocityFromDirection(Player::Direction direction) {
   }
 }
 
+glm::vec2 Bullet::GetPosition() {
+  return position_;
+}
+
+glm::vec2 Bullet::GetVelocity() {
+  return velocity_;
+}
+
+ci::Color Bullet::GetColor() const {
+  return color_;
+}
+
+float Bullet::GetRadius() const {
+  return radius_;
+}
+
 } // namespace finalproject

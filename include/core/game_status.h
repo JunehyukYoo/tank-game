@@ -21,16 +21,19 @@ public:
    */
   void ShootBullet(const Player& player);
   
-  /**
-   * Advances one frame within the game. Used for bullet trajectory calculation.
-   */
+  /** Advances one frame within the game. Used for bullet trajectory calculation. */
   void AdvanceOneFrame();
   
-  void CheckContainerContact();
+  /** Checks if bullets are coming into contact with the container. */
+  void CheckBulletContainerContact();
+  
+  bool CanTankMoveInDir(const Player& player, Player::Direction desired_move_dir) const;
+  
   
   /** Getters and Setters */
   Player GetRedPlayer();
   Player GetBluePlayer();
+  std::vector<Bullet> GetBulletsInGame();
   
 private:
   Player player_red_;

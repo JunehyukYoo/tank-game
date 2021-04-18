@@ -23,6 +23,7 @@ void GameApp::draw() {
   ci::gl::drawSolidRect(ci::Rectf(game_status_.GetBluePlayer().GetCurrPosition(),
                                   glm::vec2(game_status_.GetBluePlayer().GetCurrPosition().x - 5,
                                             game_status_.GetBluePlayer().GetCurrPosition().y - 5)));
+  DrawBullets();
 }
 
 void GameApp::keyDown(ci::app::KeyEvent event) {
@@ -69,6 +70,16 @@ void GameApp::keyDown(ci::app::KeyEvent event) {
 
 void GameApp::update() {
   game_status_.AdvanceOneFrame();
+}
+
+void GameApp::DrawBullets() {
+  if (game_status_.GetBulletsInGame().empty()) {
+    return;
+  }
+  for (Bullet& bullet : game_status_.GetBulletsInGame()) {
+    ci::gl::color(ci::Color(bullet.GetColor()));
+    ci::gl::drawSolidCircle(bullet.GetPosition(), bullet.GetRadius());
+  }
 }
 
 

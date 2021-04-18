@@ -16,6 +16,8 @@ public:
   void draw() override;
   void update() override;
   void keyDown(ci::app::KeyEvent event) override;
+  
+  void DrawBullets();
 
   const double kWindowSize = 875;
   const double kMargin = 100;
