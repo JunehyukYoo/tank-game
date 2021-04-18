@@ -1,8 +1,19 @@
-//
-// Created by Junehyuk Yoo on 17/4/2021.
-//
+#include <glm/vec2.hpp>
+#include <string>
 
-#ifndef FINAL_PROJECT_JUNEHYUKYOO_PLAYER_H
-#define FINAL_PROJECT_JUNEHYUKYOO_PLAYER_H
+namespace finalproject {
 
-#endif //FINAL_PROJECT_JUNEHYUKYOO_PLAYER_H
+/** A tank/player with all the relevant information */
+class Player {
+  
+public:
+  Player();
+
+private:
+  glm::vec2 curr_position_;
+  size_t score_;
+  
+  const std::string kTankImagePath = "";
+};
+
+} // namespace finalproject
