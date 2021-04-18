@@ -4,6 +4,8 @@
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
 #include "core/game_status.h"
+#include "core/bullet.h"
+#include "core/player.h"
 
 namespace finalproject {
     

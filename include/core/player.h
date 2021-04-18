@@ -31,7 +31,6 @@ public:
   
   /** Setters and Getters */
   void SetCurrPosition(const glm::vec2& position);
-  void SetScore(const size_t& score);
   void SetColor(const ci::Color& color);
   void SetDirection(const Direction& direction);
   ci::Color GetColor() const;

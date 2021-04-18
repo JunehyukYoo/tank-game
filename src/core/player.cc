@@ -30,10 +30,6 @@ void Player::SetCurrPosition(const glm::vec2 &position) {
   curr_position_ = position;
 }
 
-void Player::SetScore(const size_t &score) {
-  score_ = score;
-}
-
 void Player::SetColor(const cinder::Color &color) {
   color_ = color;
 }

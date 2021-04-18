@@ -11,6 +11,7 @@ GameStatus::GameStatus() {
   player_blue_.SetColor(ci::Color("blue"));
   player_blue_.SetDirection(Player::LEFT);
   player_blue_.SetCurrPosition(kBlueStart);
+  bullets_in_game_ = std::vector<Bullet>();
 }
 
 void GameStatus::ShootBullet(const Player &player) {

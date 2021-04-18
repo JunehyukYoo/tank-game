@@ -1,4 +1,7 @@
 #include <visualizer/game_app.h>
+#include "core/game_status.h"
+#include "core/bullet.h"
+#include "core/player.h"
 
 namespace finalproject {
     
@@ -16,9 +19,10 @@ void GameApp::draw() {
   
   ci::gl::color(game_status_.GetRedPlayer().GetColor());
   ci::gl::drawSolidCircle(game_status_.GetRedPlayer().GetCurrPosition(), Player::kTankDimensions);
+  //std::cout << game_status_.GetRedPlayer().GetCurrPosition().x << std::endl;
   
   ci::gl::color(game_status_.GetBluePlayer().GetColor());
-  ci::gl::drawSolidCircle(glm::vec2(590, 590), Player::kTankDimensions);
+  ci::gl::drawSolidCircle(game_status_.GetBluePlayer().GetCurrPosition(), Player::kTankDimensions);
   
   DrawBullets();
 }
@@ -31,52 +35,56 @@ void GameApp::keyDown(ci::app::KeyEvent event) {
       if (game_status_.CanTankMoveInDir(red_player, Player::Direction::UP)) {
         red_player.MoveUp(); 
       }
+      std::cout << "up red" << std::endl;
       break;
 
     case ci::app::KeyEvent::KEY_a:
       if (game_status_.CanTankMoveInDir(red_player, Player::Direction::LEFT)) {
         red_player.MoveLeft();
       }
+      std::cout << "left red" << std::endl;
       break;
       
     case ci::app::KeyEvent::KEY_s:
       if (game_status_.CanTankMoveInDir(red_player, Player::Direction::DOWN)) {
         red_player.MoveDown();
       }
+      std::cout << "down red" << std::endl;
       break;
 
     case ci::app::KeyEvent::KEY_d:
       if (game_status_.CanTankMoveInDir(red_player, Player::Direction::RIGHT)) {
         red_player.MoveRight();
       }
+      std::cout << "right red" << std::endl;
       break;
 
     case ci::app::KeyEvent::KEY_i:
       if (game_status_.CanTankMoveInDir(blue_player, Player::Direction::UP)) {
         blue_player.MoveUp();
       }
-      std::cout << "up" << std::endl;
+      std::cout << "up blue" << std::endl;
       break;
 
     case ci::app::KeyEvent::KEY_j:
       if (game_status_.CanTankMoveInDir(blue_player, Player::Direction::LEFT)) {
         blue_player.MoveLeft();
       }
-      std::cout << "left" << std::endl;
+      std::cout << "left blue" << std::endl;
       break;
 
     case ci::app::KeyEvent::KEY_k:
       if (game_status_.CanTankMoveInDir(blue_player, Player::Direction::DOWN)) {
         blue_player.MoveDown();
       }
-      std::cout << "down" << std::endl;
+      std::cout << "down blue" << std::endl;
       break;
 
     case ci::app::KeyEvent::KEY_l:
       if (game_status_.CanTankMoveInDir(blue_player, Player::Direction::RIGHT)) {
         blue_player.MoveRight();
       }
-      std::cout << "right" << std::endl;
+      std::cout << "right blue" << std::endl;
       break;
       
     case ci::app::KeyEvent::KEY_SPACE:
@@ -97,6 +105,7 @@ void GameApp::update() {
 
 void GameApp::DrawBullets() {
   if (game_status_.GetBulletsInGame().empty()) {
+    //std::cout << "gets here" << std::endl;
     return;
   }
   for (Bullet& bullet : game_status_.GetBulletsInGame()) {
