@@ -8,6 +8,7 @@ namespace finalproject {
 class Player {
   
 public:
+  /** Enum for direction the tank is currently pointing. Includes: UP, DOWN, LEFT, RIGHT */
   enum Direction {
       UP,
       DOWN,
@@ -16,6 +17,12 @@ public:
   };
   
   Player();
+  
+  /**
+   * Creates a player and sets according variables with respect to color. If the color is not blue or red, throw an
+   * invalid argument exception.
+   * @param color The color the player is.
+   */
   Player(ci::Color color);
   
   /** BIG 5 */
@@ -31,7 +38,7 @@ public:
   ~Player();
   
   
-  /** Methods to move character */
+  /** Methods to move character: Left, Right, Up, Down */
   void MoveLeft();
   void MoveRight();
   void MoveUp();

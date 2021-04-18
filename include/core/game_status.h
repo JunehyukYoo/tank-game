@@ -2,9 +2,10 @@
 #include <core/player.h>
 
 namespace finalproject {
-    
+/** Represents the current status of the game */
 class GameStatus {
 public:
+  /** Initializes the game with the blue and red player. */
   GameStatus();
   
   

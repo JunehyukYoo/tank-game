@@ -42,15 +42,18 @@ Player::Player(const Player &source) {
   curr_position_ = source.curr_position_;
   score_ = source.score_;
   color_ = source.color_;
+  direction_ = source.direction_;
 }
 
 Player::Player(Player &&source) noexcept {
   curr_position_ = source.curr_position_;
   score_ = source.score_;
   color_ = source.color_;
+  direction_ = source.direction_;
   source.curr_position_ = glm::vec2(0, 0);
   source.score_ = 0;
-  source.color_ = ci::Color();
+  source.color_ = nullptr;
+  direction_ = UP;
 }
 
 Player &Player::operator=(const Player &source) {
@@ -66,7 +69,7 @@ Player &Player::operator=(Player &&source) noexcept {
   color_ = source.color_;
   source.curr_position_ = glm::vec2(0, 0);
   source.score_ = 0;
-  source.color_ = ci::Color();
+  source.color_ = nullptr;
   return *this;
 }
 
