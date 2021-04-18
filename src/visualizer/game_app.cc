@@ -14,12 +14,11 @@ GameApp::GameApp() {
 void GameApp::draw() {
   ci::Color background_color("white");
   ci::gl::clear(background_color);
-  ci::gl::color(ci::Color(game_status_.kBorderColor));
+  ci::gl::color(ci::Color(kBorderColor));
   ci::gl::drawStrokedRect(ci::Rectf(game_status_.kTopLeft, game_status_.kBottomRight));
   
   ci::gl::color(game_status_.GetRedPlayer().GetColor());
   ci::gl::drawSolidCircle(game_status_.GetRedPlayer().GetCurrPosition(), Player::kTankDimensions);
-  //std::cout << game_status_.GetRedPlayer().GetCurrPosition().x << std::endl;
   
   ci::gl::color(game_status_.GetBluePlayer().GetColor());
   ci::gl::drawSolidCircle(game_status_.GetBluePlayer().GetCurrPosition(), Player::kTankDimensions);
@@ -47,6 +46,7 @@ void GameApp::keyDown(ci::app::KeyEvent event) {
       
     case ci::app::KeyEvent::KEY_s:
       if (game_status_.CanTankMoveInDir(red_player, Player::Direction::DOWN)) {
+        std::cout << "Got here" << std::endl;
         red_player.MoveDown();
       }
       std::cout << "down red" << std::endl;
@@ -98,6 +98,7 @@ void GameApp::keyDown(ci::app::KeyEvent event) {
       break;
   }
 }
+
 
 void GameApp::update() {
   game_status_.AdvanceOneFrame();

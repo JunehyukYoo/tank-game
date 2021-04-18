@@ -7,11 +7,11 @@ namespace finalproject {
 GameStatus::GameStatus() {
   player_red_.SetColor(ci::Color("red"));
   player_red_.SetDirection(Player::RIGHT);
-  player_red_.SetCurrPosition(kRedStart);
+  player_red_.SetCurrPosition(kRedStart); //glm::vec2(110, 110)
   player_blue_.SetColor(ci::Color("blue"));
   player_blue_.SetDirection(Player::LEFT);
-  player_blue_.SetCurrPosition(kBlueStart);
-  bullets_in_game_ = std::vector<Bullet>();
+  player_blue_.SetCurrPosition(kBlueStart); //glm::vec2(590, 590)
+  std::cout << "GameStatus constructor" << std::endl;
 }
 
 void GameStatus::ShootBullet(const Player &player) {
@@ -77,11 +77,11 @@ bool GameStatus::CanTankMoveInDir(const Player &player, const Player::Direction 
   }
 }
 
-Player& GameStatus::GetRedPlayer() {
+Player GameStatus::GetRedPlayer() const {
   return player_red_;
 }
 
-Player& GameStatus::GetBluePlayer() {
+Player GameStatus::GetBluePlayer() const {
   return player_blue_;
 }
 

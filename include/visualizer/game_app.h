@@ -25,7 +25,9 @@ public:
   const double kMargin = 100;
   
 private:
-  GameStatus game_status_;
+  GameStatus game_status_ = GameStatus();
+  
+  const ci::Color kBorderColor = ci::Color("black");
 };
 
 } // namespace visualizer
