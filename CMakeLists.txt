@@ -60,7 +60,8 @@ list(APPEND CORE_SOURCE_FILES src/core/player.cc
 list(APPEND SOURCE_FILES    ${CORE_SOURCE_FILES}
         src/visualizer/game_app.cc)
 
-list(APPEND TEST_FILES tests/test_game.cc)
+list(APPEND TEST_FILES tests/test_game_status.cc
+                       tests/test_main.cc)
 
 ci_make_app(
         APP_NAME        run-game
@@ -72,7 +73,7 @@ ci_make_app(
 ci_make_app(
         APP_NAME        final-project-test
         CINDER_PATH     ${CINDER_PATH}
-        SOURCES tests/test_game.cc ${SOURCE_FILES} ${TEST_FILES}
+        SOURCES         tests/test_main.cc ${SOURCE_FILES} ${TEST_FILES}
         INCLUDES        include
         LIBRARIES       catch2
 )

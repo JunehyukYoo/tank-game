@@ -19,7 +19,7 @@ public:
    * Method to shoot a bullet.
    * @param player The player who shot the bullet.
    */
-  void ShootBullet(Player& player);
+  void ShootBullet(const Player& player);
   
   /** Advances one frame within the game. Used for bullet trajectory calculation. */
   void AdvanceOneFrame();

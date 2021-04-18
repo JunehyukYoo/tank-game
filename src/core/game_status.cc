@@ -13,7 +13,7 @@ GameStatus::GameStatus() {
   player_blue_.SetCurrPosition(kBlueStart);
 }
 
-void GameStatus::ShootBullet(Player &player) {
+void GameStatus::ShootBullet(const Player &player) {
   Bullet bullet(player);
   bullets_in_game_.push_back(bullet);
 }

@@ -55,31 +55,39 @@ void GameApp::keyDown(ci::app::KeyEvent event) {
       if (game_status_.CanTankMoveInDir(blue_player, Player::Direction::UP)) {
         blue_player.MoveUp();
       }
+      std::cout << "up" << std::endl;
       break;
 
     case ci::app::KeyEvent::KEY_j:
       if (game_status_.CanTankMoveInDir(blue_player, Player::Direction::LEFT)) {
         blue_player.MoveLeft();
       }
+      std::cout << "left" << std::endl;
       break;
 
     case ci::app::KeyEvent::KEY_k:
       if (game_status_.CanTankMoveInDir(blue_player, Player::Direction::DOWN)) {
         blue_player.MoveDown();
       }
+      std::cout << "down" << std::endl;
       break;
 
     case ci::app::KeyEvent::KEY_l:
       if (game_status_.CanTankMoveInDir(blue_player, Player::Direction::RIGHT)) {
         blue_player.MoveRight();
       }
+      std::cout << "right" << std::endl;
       break;
       
     case ci::app::KeyEvent::KEY_SPACE:
+      std::cout << "shoot red" << std::endl;
       game_status_.ShootBullet(red_player);
+      break;
 
-    case ci::app::KeyEvent::KEY_COLON:
+    case ci::app::KeyEvent::KEY_UP:
+      std::cout << "shoot blue" << std::endl;
       game_status_.ShootBullet(blue_player);
+      break;
   }
 }
 
