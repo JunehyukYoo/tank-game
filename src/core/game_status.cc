@@ -36,6 +36,8 @@ void GameStatus::CheckBulletContainerContact() {
         pos.y <= kTopLeft.y + radius || 
         pos.y >= kBottomRight.y - radius) {
       bullets_in_game_.erase(bullets_in_game_.begin() + count);
+    } else {
+      pos += vel;
     }
     count++;
   }

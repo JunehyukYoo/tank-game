@@ -27,37 +27,55 @@ void GameApp::draw() {
 }
 
 void GameApp::keyDown(ci::app::KeyEvent event) {
+  Player red_player = game_status_.GetRedPlayer();
+  Player blue_player = game_status_.GetBluePlayer();
   switch (event.getCode()) {
     case ci::app::KeyEvent::KEY_w:
-      game_status_.GetRedPlayer().MoveUp();
+      if (game_status_.CanTankMoveInDir(red_player, Player::Direction::UP)) {
+        red_player.MoveUp(); 
+      }
       break;
 
     case ci::app::KeyEvent::KEY_a:
-      game_status_.GetRedPlayer().MoveLeft();
+      if (game_status_.CanTankMoveInDir(red_player, Player::Direction::LEFT)) {
+        red_player.MoveLeft();
+      }
       break;
       
     case ci::app::KeyEvent::KEY_s:
-      game_status_.GetRedPlayer().MoveDown();
+      if (game_status_.CanTankMoveInDir(red_player, Player::Direction::DOWN)) {
+        red_player.MoveDown();
+      }
       break;
 
     case ci::app::KeyEvent::KEY_d:
-      game_status_.GetRedPlayer().MoveRight();
+      if (game_status_.CanTankMoveInDir(red_player, Player::Direction::RIGHT)) {
+        red_player.MoveRight();
+      }
       break;
 
     case ci::app::KeyEvent::KEY_i:
-      game_status_.GetBluePlayer().MoveUp();
+      if (game_status_.CanTankMoveInDir(blue_player, Player::Direction::UP)) {
+        blue_player.MoveUp();
+      }
       break;
 
     case ci::app::KeyEvent::KEY_j:
-      game_status_.GetBluePlayer().MoveLeft();
+      if (game_status_.CanTankMoveInDir(blue_player, Player::Direction::LEFT)) {
+        blue_player.MoveLeft();
+      }
       break;
 
     case ci::app::KeyEvent::KEY_k:
-      game_status_.GetBluePlayer().MoveDown();
+      if (game_status_.CanTankMoveInDir(blue_player, Player::Direction::DOWN)) {
+        blue_player.MoveDown();
+      }
       break;
 
     case ci::app::KeyEvent::KEY_l:
-      game_status_.GetBluePlayer().MoveRight();
+      if (game_status_.CanTankMoveInDir(blue_player, Player::Direction::RIGHT)) {
+        blue_player.MoveRight();
+      }
       break;
       
     case ci::app::KeyEvent::KEY_SPACE:
