@@ -19,7 +19,7 @@ public:
    * Method to shoot a bullet.
    * @param player The player who shot the bullet.
    */
-  void ShootBullet(const Player& player);
+  void ShootBullet(Player& player);
   
   /** Advances one frame within the game. Used for bullet trajectory calculation. */
   void AdvanceOneFrame();
@@ -27,10 +27,16 @@ public:
   /** Checks if bullets are coming into contact with the container. */
   void CheckBulletContainerContact();
   
-  bool CanTankMoveInDir(const Player& player, Player::Direction desired_move_dir) const;
+  /**
+   * Checks if tank can move in the desired direction.
+   * @param player The player and relevant information.
+   * @param desired_move_dir The direction to move in.
+   * @return Whether you can move that way or not.
+   */
+  bool CanTankMoveInDir(const Player& player, const Player::Direction desired_move_dir) const;
   
   
-  /** Getters and Setters */
+  /** Getters */
   Player GetRedPlayer();
   Player GetBluePlayer();
   std::vector<Bullet> GetBulletsInGame();

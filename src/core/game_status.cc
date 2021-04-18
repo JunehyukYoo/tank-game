@@ -13,7 +13,7 @@ GameStatus::GameStatus() {
   player_blue_.SetCurrPosition(kBlueStart);
 }
 
-void GameStatus::ShootBullet(const Player &player) {
+void GameStatus::ShootBullet(Player &player) {
   Bullet bullet(player);
   bullets_in_game_.push_back(bullet);
 }
@@ -43,7 +43,7 @@ void GameStatus::CheckBulletContainerContact() {
   }
 }
 
-bool GameStatus::CanTankMoveInDir(const Player &player, Player::Direction desired_move_dir) const {
+bool GameStatus::CanTankMoveInDir(const Player &player, const Player::Direction desired_move_dir) const {
   glm::vec2 pos = player.GetCurrPosition();
   float radius = Player::kTankDimensions;
   float step = Player::kMoveStep;

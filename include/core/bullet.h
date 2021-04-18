@@ -36,8 +36,8 @@ private:
   ci::Color color_;
   float radius_;
   
-  const float kDefaultLaunchSpeed = 10;
-  const float kDefaultRadius = 5;
+  constexpr const static float kDefaultLaunchSpeed = 10;
+  constexpr const static float kDefaultRadius = 5;
 };
     
 } // namespace finalproject

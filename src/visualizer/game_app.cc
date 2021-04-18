@@ -15,14 +15,11 @@ void GameApp::draw() {
   ci::gl::drawStrokedRect(ci::Rectf(game_status_.kTopLeft, game_status_.kBottomRight));
   
   ci::gl::color(game_status_.GetRedPlayer().GetColor());
-  ci::gl::drawSolidRect(ci::Rectf(glm::vec2(game_status_.GetRedPlayer().GetCurrPosition()),
-                                  glm::vec2(game_status_.GetRedPlayer().GetCurrPosition().x + 50,
-                                            game_status_.GetRedPlayer().GetCurrPosition().y + 50)));
+  ci::gl::drawSolidCircle(game_status_.GetRedPlayer().GetCurrPosition(), Player::kTankDimensions);
   
   ci::gl::color(game_status_.GetBluePlayer().GetColor());
-  ci::gl::drawSolidRect(ci::Rectf(game_status_.GetBluePlayer().GetCurrPosition(),
-                                  glm::vec2(game_status_.GetBluePlayer().GetCurrPosition().x - 5,
-                                            game_status_.GetBluePlayer().GetCurrPosition().y - 5)));
+  ci::gl::drawSolidCircle(glm::vec2(590, 590), Player::kTankDimensions);
+  
   DrawBullets();
 }
 
@@ -79,10 +76,10 @@ void GameApp::keyDown(ci::app::KeyEvent event) {
       break;
       
     case ci::app::KeyEvent::KEY_SPACE:
-      game_status_.ShootBullet(game_status_.GetRedPlayer());
+      game_status_.ShootBullet(red_player);
 
     case ci::app::KeyEvent::KEY_COLON:
-      game_status_.ShootBullet(game_status_.GetBluePlayer());
+      game_status_.ShootBullet(blue_player);
   }
 }
 
