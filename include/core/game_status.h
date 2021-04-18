@@ -1,5 +1,6 @@
+#pragma once
 #include <glm/vec2.hpp>
-#include <core/player.h>
+#include "player.h"
 
 namespace finalproject {
 /** Represents the current status of the game */

@@ -14,7 +14,8 @@ Player::Player(ci::Color color) {
     curr_position_ = kBlueStart;
     direction_ = LEFT;
   } else {
-    throw std::invalid_argument("Illegal color");
+    //throw std::invalid_argument("Illegal color");
+    std::cout << "Got here" << std::endl;
   }
 }
 

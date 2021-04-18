@@ -8,9 +8,14 @@ GameApp::GameApp() {
   ci::app::setWindowSize((int) kWindowSize, (int) kWindowSize);
 }
 
-void GameApp::draw() {}
+void GameApp::draw() {
+  ci::Color background_color("white");
+  ci::gl::clear(background_color);
+}
 
-void GameApp::keyDown(ci::app::KeyEvent event) {}
+void GameApp::keyDown(ci::app::KeyEvent event) {
+  
+}
 
 
 } // namespace visualizer
