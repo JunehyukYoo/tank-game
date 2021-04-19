@@ -11,20 +11,36 @@ GameApp::GameApp() {
 }
 
 void GameApp::draw() {
-  ci::Color background_color("black");
+  ci::Color background_color(kBackgroundColor);
   ci::gl::clear(background_color);
-  ci::gl::color(ci::Color(kBorderColor));
-  ci::gl::drawStrokedRect(ci::Rectf(game_status_.kTopLeft, game_status_.kBottomRight));
+
+  Player red_player = game_status_.GetRedPlayer();
+  Player blue_player = game_status_.GetBluePlayer();
   
-  ci::gl::color(game_status_.GetRedPlayer().GetColor());
-  ci::gl::drawSolidCircle(game_status_.GetRedPlayer().GetPosition(), Player::kTankDimensions);
-  std::cout << game_status_.GetRedPlayer().GetPosition() << std::endl;
-  //std::cout << game_status_.GetBulletsInGame().size() << std::endl;
-  
-  ci::gl::color(game_status_.GetBluePlayer().GetColor());
-  ci::gl::drawSolidCircle(game_status_.GetBluePlayer().GetPosition(), Player::kTankDimensions);
-  
-  DrawBullets();
+  if (red_player.GetScore() == 10) {
+    ci::gl::color(kDefaultColor);
+    ci::gl::drawString("Red Player Wins!", glm::vec2((int) kWindowSize/2, (int) kWindowSize/2));
+  } else if (blue_player.GetScore() == 10) {
+    ci::gl::color(kDefaultColor);
+    ci::gl::drawString("Blue Player Wins!", glm::vec2((int) kWindowSize/2, (int) kWindowSize/2));
+  } else {
+    ci::gl::color(kDefaultColor);
+    ci::gl::drawStrokedRect(ci::Rectf(game_status_.kTopLeft, game_status_.kBottomRight));
+
+    ci::gl::color(kDefaultColor);
+    ci::gl::drawString("Red Player: " + std::to_string(red_player.GetScore()), game_status_.kRedScoreDisplayLoc);
+    ci::gl::drawString("Blue Player: " + std::to_string(blue_player.GetScore()), game_status_.kBlueScoreDisplayLoc);
+
+    ci::gl::color(red_player.GetColor());
+    ci::gl::drawSolidCircle(red_player.GetPosition(), Player::kTankDimensions);
+    //std::cout << game_status_.GetRedPlayer().GetPosition() << std::endl;
+    //std::cout << game_status_.GetBulletsInGame().size() << std::endl;
+
+    ci::gl::color(blue_player.GetColor());
+    ci::gl::drawSolidCircle(blue_player.GetPosition(), Player::kTankDimensions);
+
+    DrawBullets(); 
+  }
 }
 
 void GameApp::keyDown(ci::app::KeyEvent event) {
@@ -52,37 +68,37 @@ void GameApp::keyDown(ci::app::KeyEvent event) {
 
     case ci::app::KeyEvent::KEY_d:
       if (game_status_.CanTankMoveInDir(red_player, Player::Direction::RIGHT)) {
-        //std::cout << "move right" << std::endl;
+        std::cout << "right red" << std::endl;
         red_player.MoveRight();
       }
       break;
 
     case ci::app::KeyEvent::KEY_i:
       if (game_status_.CanTankMoveInDir(blue_player, Player::Direction::UP)) {
+        std::cout << "up blue" << std::endl;
         blue_player.MoveUp();
       }
-      std::cout << "up blue" << std::endl;
       break;
 
     case ci::app::KeyEvent::KEY_j:
       if (game_status_.CanTankMoveInDir(blue_player, Player::Direction::LEFT)) {
+        std::cout << "left blue" << std::endl;
         blue_player.MoveLeft();
       }
-      std::cout << "left blue" << std::endl;
       break;
 
     case ci::app::KeyEvent::KEY_k:
       if (game_status_.CanTankMoveInDir(blue_player, Player::Direction::DOWN)) {
+        std::cout << "down blue" << std::endl;
         blue_player.MoveDown();
       }
-      std::cout << "down blue" << std::endl;
       break;
 
     case ci::app::KeyEvent::KEY_l:
       if (game_status_.CanTankMoveInDir(blue_player, Player::Direction::RIGHT)) {
+        std::cout << "right blue" << std::endl;
         blue_player.MoveRight();
       }
-      std::cout << "right blue" << std::endl;
       break;
       
     case ci::app::KeyEvent::KEY_SPACE:
@@ -104,7 +120,6 @@ void GameApp::update() {
 
 void GameApp::DrawBullets() {
   if (game_status_.GetBulletsInGame().empty()) {
-    //std::cout << "is empty" << std::endl;
     return;
   }
   for (Bullet& bullet : game_status_.GetBulletsInGame()) {

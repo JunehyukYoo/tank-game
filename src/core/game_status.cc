@@ -7,10 +7,10 @@ namespace finalproject {
 GameStatus::GameStatus() {
   player_red_.SetColor(ci::Color("red"));
   player_red_.SetDirection(Player::RIGHT);
-  player_red_.SetPosition(kRedStart); //glm::vec2(110, 110)
+  player_red_.SetPosition(kRedStart); //glm::vec2(115, 115)
   player_blue_.SetColor(ci::Color("blue"));
   player_blue_.SetDirection(Player::LEFT);
-  player_blue_.SetPosition(kBlueStart); //glm::vec2(590, 590)
+  player_blue_.SetPosition(kBlueStart); //glm::vec2(585, 585)
 }
 
 void GameStatus::ShootBullet(const Player &player) {

@@ -9,6 +9,8 @@ class GameStatus {
 public:
   const glm::vec2 kTopLeft = glm::vec2(100, 100);
   const glm::vec2 kBottomRight = glm::vec2(600, 600);
+  const glm::vec2 kRedScoreDisplayLoc = glm::vec2(200, 50);
+  const glm::vec2 kBlueScoreDisplayLoc = glm::vec2(400, 50);
   
   /** Initializes the game with the blue and red player. */
   GameStatus();
@@ -24,6 +26,8 @@ public:
   
   /** Checks if bullets are coming into contact with the container. */
   void CheckBulletContainerContact();
+  
+  
   
   /**
    * Checks if tank can move in the desired direction.
@@ -44,8 +48,8 @@ private:
   Player player_blue_;
   std::vector<Bullet> bullets_in_game_;
 
-  const glm::vec2 kRedStart = glm::vec2(110, 110);
-  const glm::vec2 kBlueStart = glm::vec2(590, 590);
+  const glm::vec2 kRedStart = glm::vec2(115, 115);
+  const glm::vec2 kBlueStart = glm::vec2(585, 585);
 };
     
 }

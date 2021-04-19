@@ -14,8 +14,7 @@ void Player::MoveLeft() {
 void Player::MoveRight() {
   curr_position_.x += kMoveStep;
   direction_ = RIGHT;
-  std::cout << "move right" << std::endl;
-  
+  std::cout << curr_position_ << std::endl;
 }
 
 void Player::MoveUp() {

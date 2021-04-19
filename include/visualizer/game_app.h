@@ -25,7 +25,8 @@ public:
 private:
   GameStatus game_status_;
   
-  const ci::Color kBorderColor = ci::Color("white");
+  const ci::Color kDefaultColor = ci::Color("white");
+  const ci::Color kBackgroundColor = ci::Color("black");
 };
 
 } // namespace visualizer
