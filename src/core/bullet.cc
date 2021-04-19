@@ -42,4 +42,8 @@ float Bullet::GetRadius() const {
   return radius_;
 }
 
+void Bullet::SetPosition(const glm::vec2 &new_pos) {
+  position_ = new_pos;
+}
+
 } // namespace finalproject

@@ -44,8 +44,8 @@ void GameApp::draw() {
 }
 
 void GameApp::keyDown(ci::app::KeyEvent event) {
-  Player red_player = game_status_.GetRedPlayer();
-  Player blue_player = game_status_.GetBluePlayer();
+  Player& red_player = game_status_.GetRedPlayer();
+  Player& blue_player = game_status_.GetBluePlayer();
   switch (event.getCode()) {
     case ci::app::KeyEvent::KEY_w:
       if (game_status_.CanTankMoveInDir(red_player, Player::Direction::UP)) {

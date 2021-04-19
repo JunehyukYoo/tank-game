@@ -38,7 +38,7 @@ void GameStatus::CheckBulletContainerContact() {
         pos.y >= kBottomRight.y - radius) {
       bullets_in_game_.erase(bullets_in_game_.begin() + count);
     } else {
-      pos += vel;
+      bullet.SetPosition(pos + vel);
     }
     count++;
   }
@@ -109,11 +109,11 @@ bool GameStatus::CanTankMoveInDir(const Player &player, const Player::Direction 
   }
 }
 
-Player GameStatus::GetRedPlayer() {
+Player& GameStatus::GetRedPlayer() {
   return player_red_;
 }
 
-Player GameStatus::GetBluePlayer() {
+Player& GameStatus::GetBluePlayer() {
   return player_blue_;
 }
 
