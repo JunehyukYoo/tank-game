@@ -5,7 +5,7 @@ namespace finalproject {
 Bullet::Bullet() {}
 
 Bullet::Bullet(const Player& player) {
-  position_ = player.GetCurrPosition();
+  position_ = player.GetPosition();
   color_ = player.GetColor();
   radius_ = kDefaultRadius;
   Player::Direction direction = player.GetDirection();

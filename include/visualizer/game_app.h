@@ -4,8 +4,6 @@
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
 #include "core/game_status.h"
-#include "core/bullet.h"
-#include "core/player.h"
 
 namespace finalproject {
     
@@ -25,9 +23,9 @@ public:
   const double kMargin = 100;
   
 private:
-  GameStatus game_status_ = GameStatus();
+  GameStatus game_status_;
   
-  const ci::Color kBorderColor = ci::Color("black");
+  const ci::Color kBorderColor = ci::Color("white");
 };
 
 } // namespace visualizer

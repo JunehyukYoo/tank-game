@@ -35,8 +35,8 @@ public:
   
   
   /** Getters */
-  Player GetRedPlayer() const;
-  Player GetBluePlayer() const;
+  Player GetRedPlayer();
+  Player GetBluePlayer();
   std::vector<Bullet> GetBulletsInGame();
   
 private:

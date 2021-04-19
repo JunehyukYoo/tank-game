@@ -7,11 +7,10 @@ namespace finalproject {
 GameStatus::GameStatus() {
   player_red_.SetColor(ci::Color("red"));
   player_red_.SetDirection(Player::RIGHT);
-  player_red_.SetCurrPosition(kRedStart); //glm::vec2(110, 110)
+  player_red_.SetPosition(kRedStart); //glm::vec2(110, 110)
   player_blue_.SetColor(ci::Color("blue"));
   player_blue_.SetDirection(Player::LEFT);
-  player_blue_.SetCurrPosition(kBlueStart); //glm::vec2(590, 590)
-  std::cout << "GameStatus constructor" << std::endl;
+  player_blue_.SetPosition(kBlueStart); //glm::vec2(590, 590)
 }
 
 void GameStatus::ShootBullet(const Player &player) {
@@ -45,7 +44,7 @@ void GameStatus::CheckBulletContainerContact() {
 }
 
 bool GameStatus::CanTankMoveInDir(const Player &player, const Player::Direction desired_move_dir) const {
-  glm::vec2 pos = player.GetCurrPosition();
+  glm::vec2 pos = player.GetPosition();
   float radius = Player::kTankDimensions;
   float step = Player::kMoveStep;
   if (desired_move_dir == Player::Direction::UP) {
@@ -77,11 +76,11 @@ bool GameStatus::CanTankMoveInDir(const Player &player, const Player::Direction 
   }
 }
 
-Player GameStatus::GetRedPlayer() const {
+Player GameStatus::GetRedPlayer() {
   return player_red_;
 }
 
-Player GameStatus::GetBluePlayer() const {
+Player GameStatus::GetBluePlayer() {
   return player_blue_;
 }
 

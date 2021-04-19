@@ -29,11 +29,11 @@ public:
   void MoveDown();
   
   /** Setters and Getters */
-  void SetCurrPosition(const glm::vec2& position);
+  void SetPosition(const glm::vec2& position);
   void SetColor(const ci::Color& color);
   void SetDirection(const Direction& direction);
   ci::Color GetColor() const;
-  glm::vec2 GetCurrPosition() const;
+  glm::vec2 GetPosition() const;
   size_t GetScore() const;
   Direction GetDirection() const;
 

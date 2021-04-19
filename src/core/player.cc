@@ -7,26 +7,28 @@ Player::Player() {
 }
 
 void Player::MoveLeft() {
-  curr_position_.x += -kMoveStep;
+  curr_position_.x -= kMoveStep;
   direction_ = LEFT;
 }
 
 void Player::MoveRight() {
   curr_position_.x += kMoveStep;
   direction_ = RIGHT;
+  std::cout << "move right" << std::endl;
+  
 }
 
 void Player::MoveUp() {
-  curr_position_.y += -kMoveStep;
+  curr_position_.y -= kMoveStep;
   direction_ = UP;
 }
 
 void Player::MoveDown() {
-  curr_position_.y += +kMoveStep;
+  curr_position_.y += kMoveStep;
   direction_ = DOWN;
 }
 
-void Player::SetCurrPosition(const glm::vec2 &position) {
+void Player::SetPosition(const glm::vec2 &position) {
   curr_position_ = position;
 }
 
@@ -42,7 +44,7 @@ ci::Color Player::GetColor() const {
   return color_;
 }
 
-glm::vec2 Player::GetCurrPosition() const {
+glm::vec2 Player::GetPosition() const {
   return curr_position_;
 }
 

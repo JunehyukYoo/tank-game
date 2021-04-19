@@ -1,5 +1,4 @@
 #include <visualizer/game_app.h>
-#include "core/game_status.h"
 #include "core/bullet.h"
 #include "core/player.h"
 
@@ -12,16 +11,18 @@ GameApp::GameApp() {
 }
 
 void GameApp::draw() {
-  ci::Color background_color("white");
+  ci::Color background_color("black");
   ci::gl::clear(background_color);
   ci::gl::color(ci::Color(kBorderColor));
   ci::gl::drawStrokedRect(ci::Rectf(game_status_.kTopLeft, game_status_.kBottomRight));
   
   ci::gl::color(game_status_.GetRedPlayer().GetColor());
-  ci::gl::drawSolidCircle(game_status_.GetRedPlayer().GetCurrPosition(), Player::kTankDimensions);
+  ci::gl::drawSolidCircle(game_status_.GetRedPlayer().GetPosition(), Player::kTankDimensions);
+  std::cout << game_status_.GetRedPlayer().GetPosition() << std::endl;
+  //std::cout << game_status_.GetBulletsInGame().size() << std::endl;
   
   ci::gl::color(game_status_.GetBluePlayer().GetColor());
-  ci::gl::drawSolidCircle(game_status_.GetBluePlayer().GetCurrPosition(), Player::kTankDimensions);
+  ci::gl::drawSolidCircle(game_status_.GetBluePlayer().GetPosition(), Player::kTankDimensions);
   
   DrawBullets();
 }
@@ -34,29 +35,26 @@ void GameApp::keyDown(ci::app::KeyEvent event) {
       if (game_status_.CanTankMoveInDir(red_player, Player::Direction::UP)) {
         red_player.MoveUp(); 
       }
-      std::cout << "up red" << std::endl;
       break;
 
     case ci::app::KeyEvent::KEY_a:
       if (game_status_.CanTankMoveInDir(red_player, Player::Direction::LEFT)) {
         red_player.MoveLeft();
       }
-      std::cout << "left red" << std::endl;
+      
       break;
       
     case ci::app::KeyEvent::KEY_s:
       if (game_status_.CanTankMoveInDir(red_player, Player::Direction::DOWN)) {
-        std::cout << "Got here" << std::endl;
         red_player.MoveDown();
       }
-      std::cout << "down red" << std::endl;
       break;
 
     case ci::app::KeyEvent::KEY_d:
       if (game_status_.CanTankMoveInDir(red_player, Player::Direction::RIGHT)) {
+        //std::cout << "move right" << std::endl;
         red_player.MoveRight();
       }
-      std::cout << "right red" << std::endl;
       break;
 
     case ci::app::KeyEvent::KEY_i:
@@ -106,7 +104,7 @@ void GameApp::update() {
 
 void GameApp::DrawBullets() {
   if (game_status_.GetBulletsInGame().empty()) {
-    //std::cout << "gets here" << std::endl;
+    //std::cout << "is empty" << std::endl;
     return;
   }
   for (Bullet& bullet : game_status_.GetBulletsInGame()) {
