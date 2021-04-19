@@ -11,6 +11,8 @@ public:
   const glm::vec2 kBottomRight = glm::vec2(600, 600);
   const glm::vec2 kRedScoreDisplayLoc = glm::vec2(200, 50);
   const glm::vec2 kBlueScoreDisplayLoc = glm::vec2(400, 50);
+  const ci::Color kColorPlayerRed = ci::Color("red");
+  const ci::Color kColorPlayerBlue = ci::Color("blue");
   
   /** Initializes the game with the blue and red player. */
   GameStatus();

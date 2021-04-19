@@ -63,7 +63,7 @@ TEST_CASE("Test player movement") {
   }
 }
 
-TEST_CASE("Testing general bullet functionality") {
+TEST_CASE("Testing bullet functionality") {
   finalproject::GameStatus game;
   finalproject::Player player;
   player.SetColor(ci::Color("red"));
@@ -83,5 +83,25 @@ TEST_CASE("Testing general bullet functionality") {
     REQUIRE(bullet.GetPosition() == glm::vec2(300, 300));
     REQUIRE(bullet.GetColor() == ci::Color("red"));
     REQUIRE(bullet.GetVelocity() == glm::vec2(10, 0));
+  }
+  
+  SECTION("Bullet hits container") {
+    player.SetPosition(glm::vec2(595, 300));
+    game.ShootBullet(player);
+    REQUIRE(game.GetBulletsInGame().size() == 1);
+    game.AdvanceOneFrame();
+    REQUIRE(game.GetBulletsInGame().size() == 0);
+  }
+  
+  SECTION("Bullet hits opponent") {
+    player.SetPosition(glm::vec2(580, 585));
+    game.ShootBullet(player);
+    REQUIRE(game.GetBulletsInGame().size() == 1);
+    game.AdvanceOneFrame();
+    REQUIRE(game.GetBulletsInGame().size() == 0);
+    REQUIRE(game.GetRedPlayer().GetPosition() == glm::vec2(115, 115));
+    REQUIRE(game.GetBluePlayer().GetPosition() == glm::vec2(585, 585));
+    REQUIRE(game.GetRedPlayer().GetScore() == 1);
+    REQUIRE(game.GetBluePlayer().GetScore() == 0);
   }
 }

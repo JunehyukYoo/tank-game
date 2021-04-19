@@ -5,12 +5,12 @@
 namespace finalproject {
 
 GameStatus::GameStatus() {
-  player_red_.SetColor(ci::Color("red"));
+  player_red_.SetColor(kColorPlayerRed);
   player_red_.SetDirection(Player::RIGHT);
-  player_red_.SetPosition(kRedStart); //glm::vec2(115, 115)
-  player_blue_.SetColor(ci::Color("blue"));
+  player_red_.SetPosition(kRedStart); 
+  player_blue_.SetColor(kColorPlayerBlue);
   player_blue_.SetDirection(Player::LEFT);
-  player_blue_.SetPosition(kBlueStart); //glm::vec2(585, 585)
+  player_blue_.SetPosition(kBlueStart);
 }
 
 void GameStatus::ShootBullet(const Player &player) {
@@ -77,36 +77,35 @@ void GameStatus::CheckBulletPlayerContact() {
 }
 
 bool GameStatus::CanTankMoveInDir(const Player &player, const Player::Direction desired_move_dir) const {
-  glm::vec2 pos = player.GetPosition();
+  glm::vec2 this_pos = player.GetPosition();
+  Player other;
   float radius = Player::kTankDimensions;
   float step = Player::kMoveStep;
+  if (player.GetColor() == kColorPlayerRed) {
+    other = player_blue_;
+  } else {
+    other = player_red_;
+  }
+  //glm::vec2 other_pos = other.GetPosition();
+  
   if (desired_move_dir == Player::Direction::UP) {
-    if (pos.y <= kTopLeft.y + radius + step) {
+    if (this_pos.y <= kTopLeft.y + radius + step) {
       return false;
-    } else {
-      return true;
     }
   } else if (desired_move_dir == Player::Direction::DOWN) {
-    if (pos.y >= kBottomRight.y - radius - step) {
+    if (this_pos.y > kBottomRight.y - radius - step) {
       return false;
-    } else {
-      return true;
     }
   } else if (desired_move_dir == Player::Direction::LEFT) {
-    if (pos.x <= kTopLeft.x + radius + step) {
+    if (this_pos.x < kTopLeft.x + radius + step) {
       return false;
-    } else {
-      return true;
     }
   } else if (desired_move_dir == Player::Direction::RIGHT) {
-    if (pos.x >= kBottomRight.x - radius - step) {
+    if (this_pos.x > kBottomRight.x - radius - step) {
       return false;
-    } else {
-      return true;
     }
-  } else {
-    throw std::invalid_argument("Invalid direction to move in for CanTankMoveInDir()");
   }
+  return true;
 }
 
 Player& GameStatus::GetRedPlayer() {
