@@ -24,10 +24,11 @@ public:
   /** Advances one frame within the game. Used for bullet trajectory calculation. */
   void AdvanceOneFrame();
   
-  /** Checks if bullets are coming into contact with the container. */
+  /** Checks if bullets are coming into contact with the container, deletes bullet if occurs. */
   void CheckBulletContainerContact();
   
-  
+  /** Checks if bullets are coming into contact with players, and what to do then. */
+  void CheckBulletPlayerContact();
   
   /**
    * Checks if tank can move in the desired direction.

@@ -19,6 +19,7 @@ void GameStatus::ShootBullet(const Player &player) {
 }
 
 void GameStatus::AdvanceOneFrame() {
+  CheckBulletPlayerContact();
   CheckBulletContainerContact();
 }
 
@@ -40,6 +41,38 @@ void GameStatus::CheckBulletContainerContact() {
       pos += vel;
     }
     count++;
+  }
+}
+
+void GameStatus::CheckBulletPlayerContact() {
+  if (bullets_in_game_.empty()) {
+    return;
+  }
+  glm::vec2 red_pos = player_red_.GetPosition();
+  glm::vec2 blue_pos = player_blue_.GetPosition();
+  float player_radius = player_red_.kTankDimensions;
+  bool is_contact = false;
+  
+  for (Bullet& bullet : bullets_in_game_) {
+    glm::vec2 bullet_pos = bullet.GetPosition();
+    float bullet_radius = bullet.GetRadius();
+    ci::Color bullet_color = bullet.GetColor();
+    
+    if ((std::abs(glm::distance(red_pos, bullet_pos)) <= player_radius + bullet_radius) && bullet_color == player_blue_.GetColor()) {
+      player_blue_.SetScore(player_blue_.GetScore() + 1);
+      is_contact = true;
+      break;
+    } else if ((std::abs(glm::distance(blue_pos, bullet_pos)) <= player_radius + bullet_radius) && bullet_color == player_red_.GetColor()) {
+      player_red_.SetScore(player_red_.GetScore() + 1);
+      is_contact = true;
+      break;
+    }
+  }
+  
+  if (is_contact) {
+    bullets_in_game_.clear();
+    player_red_.SetPosition(kRedStart);
+    player_blue_.SetPosition(kBlueStart);
   }
 }
 
@@ -87,5 +120,6 @@ Player GameStatus::GetBluePlayer() {
 std::vector<Bullet> GameStatus::GetBulletsInGame() {
   return bullets_in_game_;
 }
+
 
 } // namespace finalproject

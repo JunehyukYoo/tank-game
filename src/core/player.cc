@@ -55,4 +55,9 @@ Player::Direction Player::GetDirection() const {
   return direction_;
 }
 
+void Player::SetScore(const size_t &score) {
+  score_ = score;
+}
+    
+
 }

@@ -32,6 +32,7 @@ public:
   void SetPosition(const glm::vec2& position);
   void SetColor(const ci::Color& color);
   void SetDirection(const Direction& direction);
+  void SetScore(const size_t& score);
   ci::Color GetColor() const;
   glm::vec2 GetPosition() const;
   size_t GetScore() const;
