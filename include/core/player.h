@@ -9,6 +9,8 @@ class Player {
   
 public:
   constexpr static const float kTankDimensions = 10;
+  constexpr static const float kMuzzleWidth = 8;
+  constexpr static const float kMuzzleLength = 16;
   constexpr static const float kMoveStep = 5;
   
   /** Enum for direction the tank is currently pointing. Includes: UP, DOWN, LEFT, RIGHT */

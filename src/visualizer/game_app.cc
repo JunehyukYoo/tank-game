@@ -38,6 +38,8 @@ void GameApp::draw() {
     ci::gl::drawSolidCircle(blue_player.GetPosition(), Player::kTankDimensions);
 
     DrawBullets(); 
+    DrawTankMuzzle(red_player);
+    DrawTankMuzzle(blue_player);
   }
 }
 
@@ -118,6 +120,32 @@ void GameApp::DrawBullets() {
     ci::gl::drawSolidCircle(bullet.GetPosition(), bullet.GetRadius());
   }
 }
+
+void GameApp::DrawTankMuzzle(const Player& player) {
+  ci::gl::color(player.GetColor());
+  if (player.GetDirection() == Player::UP) {
+    glm::vec2 top_left(player.GetPosition().x - Player::kMuzzleWidth / 2, player.GetPosition().y - Player::kMuzzleLength);
+    glm::vec2 bottom_right(player.GetPosition().x + Player::kMuzzleWidth / 2, player.GetPosition().y);
+    ci::gl::drawSolidRect(ci::Rectf(top_left, bottom_right));
+    
+  } else if (player.GetDirection() == Player::DOWN) {
+    glm::vec2 top_left(player.GetPosition().x - Player::kMuzzleWidth / 2, player.GetPosition().y);
+    glm::vec2 bottom_right(player.GetPosition().x + Player::kMuzzleWidth / 2, player.GetPosition().y + Player::kMuzzleLength);
+    ci::gl::drawSolidRect(ci::Rectf(top_left, bottom_right));
+    
+  } else if (player.GetDirection() == Player::LEFT) {
+    glm::vec2 top_left(player.GetPosition().x - Player::kMuzzleLength, player.GetPosition().y - Player::kMuzzleWidth / 2);
+    glm::vec2 bottom_right(player.GetPosition().x, player.GetPosition().y + Player::kMuzzleWidth / 2);
+    ci::gl::drawSolidRect(ci::Rectf(top_left, bottom_right));
+    
+  } else if (player.GetDirection() == Player::RIGHT) {
+    glm::vec2 top_left(player.GetPosition().x, player.GetPosition().y - Player::kMuzzleWidth / 2);
+    glm::vec2 bottom_right(player.GetPosition().x + Player::kMuzzleLength, player.GetPosition().y + Player::kMuzzleWidth / 2);
+    ci::gl::drawSolidRect(ci::Rectf(top_left, bottom_right));
+    
+  }
+}
+
 
 
 } // namespace visualizer

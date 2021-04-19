@@ -8,7 +8,8 @@
 namespace finalproject {
     
 namespace visualizer {
-
+    
+/** The application for the Tank Game */
 class GameApp : public ci::app::App {
 public:
   GameApp();
@@ -17,9 +18,13 @@ public:
   void update() override;
   void keyDown(ci::app::KeyEvent event) override;
   
+  /** Draws the bullets in the game */
   void DrawBullets();
+  
+  /** Draws the tank muzzles */
+  void DrawTankMuzzle(const Player& player);
 
-  const double kWindowSize = 875;
+  const double kWindowSize = 700;
   const double kMargin = 100;
   
 private:
