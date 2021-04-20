@@ -8,8 +8,9 @@ TEST_CASE("Sanity check") {
   REQUIRE(1 < 2);
 }
 
-TEST_CASE("Testing player spawning") {
+TEST_CASE("Testing game initialization") {
   finalproject::GameStatus game;
+  REQUIRE(game.GetBulletsInGame().size() == 0);
   
   SECTION("Red player") {
     finalproject::Player red_player = game.GetRedPlayer();
@@ -26,6 +27,7 @@ TEST_CASE("Testing player spawning") {
     REQUIRE(blue_player.GetScore() == 0);
     REQUIRE(blue_player.GetPosition() == glm::vec2(595, 595));
   }
+  
 }
 
 TEST_CASE("Test player movement") {

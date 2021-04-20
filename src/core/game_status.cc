@@ -86,23 +86,43 @@ bool GameStatus::CanTankMoveInDir(const Player &player, const Player::Direction 
   } else {
     other = player_red_;
   }
-  //glm::vec2 other_pos = other.GetPosition();
+  glm::vec2 other_pos = other.GetPosition();
   
   if (desired_move_dir == Player::Direction::UP) {
     if (this_pos.y <= kTopLeft.y + radius + step) {
       return false;
     }
+    if (std::abs(glm::distance(this_pos.x, other_pos.x)) < 2 * radius) {
+      if (other_pos.y <= this_pos.y - radius && std::abs(glm::distance(this_pos.y, other_pos.y)) < step + 2 * radius) {
+        return false;
+      }
+    }
   } else if (desired_move_dir == Player::Direction::DOWN) {
     if (this_pos.y > kBottomRight.y - radius - step) {
       return false;
+    }
+    if (std::abs(glm::distance(this_pos.x, other_pos.x)) < 2 * radius) {
+      if (other_pos.y >= this_pos.y + radius && std::abs(glm::distance(this_pos.y, other_pos.y)) < step + 2 * radius) {
+        return false;
+      }
     }
   } else if (desired_move_dir == Player::Direction::LEFT) {
     if (this_pos.x < kTopLeft.x + radius + step) {
       return false;
     }
+    if (std::abs(glm::distance(this_pos.y, other_pos.y)) < 2 * radius) {
+      if (other_pos.x <= this_pos.x - radius && std::abs(glm::distance(this_pos.x, other_pos.x)) < step + 2 * radius) {
+        return false;
+      }
+    }
   } else if (desired_move_dir == Player::Direction::RIGHT) {
     if (this_pos.x > kBottomRight.x - radius - step) {
       return false;
+    }
+    if (std::abs(glm::distance(this_pos.y, other_pos.y)) < 2 * radius) {
+      if (other_pos.x >= this_pos.x + radius && std::abs(glm::distance(this_pos.x, other_pos.x)) < step + 2 * radius) {
+        return false;
+      }
     }
   }
   return true;
