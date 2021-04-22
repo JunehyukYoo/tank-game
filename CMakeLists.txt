@@ -55,7 +55,9 @@ get_filename_component(APP_PATH "${CMAKE_CURRENT_SOURCE_DIR}/" ABSOLUTE)
 
 list(APPEND CORE_SOURCE_FILES src/core/player.cc
                               src/core/game_status.cc
-                              src/core/bullet.cc)
+                              src/core/bullet.cc
+                              src/core/map.cc
+                              src/core/wall.cc)
 
 list(APPEND SOURCE_FILES    ${CORE_SOURCE_FILES}
         src/visualizer/game_app.cc)
