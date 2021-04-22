@@ -1,6 +1,7 @@
 #include <core/game_status.h>
 #include <core/player.h>
 #include "core/bullet.h"
+#include "core/map.h"
 
 namespace finalproject {
 

@@ -3,6 +3,7 @@
 #include "core/game_status.h"
 #include "core/bullet.h"
 #include "core/player.h"
+#include "core/map.h"
 
 TEST_CASE("Sanity check") {
   REQUIRE(1 < 2);
@@ -17,7 +18,7 @@ TEST_CASE("Testing game initialization") {
     REQUIRE(red_player.GetColor() == ci::Color("red"));
     REQUIRE(red_player.GetDirection() == finalproject::Player::RIGHT);
     REQUIRE(red_player.GetScore() == 0);
-    REQUIRE(red_player.GetPosition() == glm::vec2(105, 105));
+    REQUIRE(red_player.GetPosition() == glm::vec2(115, 115));
   }
 
   SECTION("Blue player") {
@@ -25,7 +26,7 @@ TEST_CASE("Testing game initialization") {
     REQUIRE(blue_player.GetColor() == ci::Color("blue"));
     REQUIRE(blue_player.GetDirection() == finalproject::Player::LEFT);
     REQUIRE(blue_player.GetScore() == 0);
-    REQUIRE(blue_player.GetPosition() == glm::vec2(595, 595));
+    REQUIRE(blue_player.GetPosition() == glm::vec2(585, 585));
   }
   
 }
@@ -40,13 +41,13 @@ TEST_CASE("Test player movement") {
   REQUIRE(game.CanTankMoveInDir(red_player, finalproject::Player::UP));
   REQUIRE(red_player.GetDirection() == finalproject::Player::RIGHT);
   red_player.MoveRight();
-  REQUIRE(red_player.GetPosition() == glm::vec2(305, 300));
+  REQUIRE(red_player.GetPosition() == glm::vec2(310, 300));
   REQUIRE(red_player.GetDirection() == finalproject::Player::RIGHT);
   red_player.MoveUp();
-  REQUIRE(red_player.GetPosition() == glm::vec2(305, 295));
+  REQUIRE(red_player.GetPosition() == glm::vec2(310, 290));
   REQUIRE(red_player.GetDirection() == finalproject::Player::UP);
   red_player.MoveDown();
-  REQUIRE(red_player.GetPosition() == glm::vec2(305, 300));
+  REQUIRE(red_player.GetPosition() == glm::vec2(310, 300));
   REQUIRE(red_player.GetDirection() == finalproject::Player::DOWN);
   red_player.MoveLeft();
   REQUIRE(red_player.GetPosition() == glm::vec2(300, 300));

@@ -2,6 +2,7 @@
 #include <vector>
 #include "player.h"
 #include "bullet.h"
+#include "map.h"
 
 namespace finalproject {
 /** Represents the current status of the game */
@@ -47,12 +48,14 @@ public:
   std::vector<Bullet> GetBulletsInGame();
   
 private:
+  const float kPercent = 0.80;
+  const glm::vec2 kRedStart = glm::vec2(115, 115);
+  const glm::vec2 kBlueStart = glm::vec2(585, 585);
+  
   Player player_red_;
   Player player_blue_;
   std::vector<Bullet> bullets_in_game_;
-
-  const glm::vec2 kRedStart = glm::vec2(115, 115);
-  const glm::vec2 kBlueStart = glm::vec2(585, 585);
+  Map map_ = Map(kTopLeft, kBottomRight, kPercent);
 };
     
 }
