@@ -40,6 +40,7 @@ void GameApp::draw() {
     DrawBullets(); 
     DrawTankMuzzle(red_player);
     DrawTankMuzzle(blue_player);
+    DrawWalls();
   }
 }
 
@@ -146,6 +147,19 @@ void GameApp::DrawTankMuzzle(const Player& player) {
   }
 }
 
+void GameApp::DrawWalls() {
+  std::vector<std::vector<Wall>> map = game_status_.GetMap().GetWalls();
+  if (map.empty()) {
+    return;
+  }
+  ci::gl::color(kDefaultColor);
+  for (size_t row = 0; row < map.size(); row++) {
+    for (size_t col = 0; col < map[0].size(); col++) {
+      Wall wall = map[row][col];
+      ci::gl::drawSolidRect(ci::Rectf(wall.top_left_, wall.bottom_right_));
+    }
+  }
+}
 
 
 } // namespace visualizer

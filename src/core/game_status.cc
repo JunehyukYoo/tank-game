@@ -141,5 +141,9 @@ std::vector<Bullet> GameStatus::GetBulletsInGame() {
   return bullets_in_game_;
 }
 
+Map GameStatus::GetMap() {
+  return map_;
+}
+
 
 } // namespace finalproject

@@ -46,9 +46,10 @@ public:
   Player& GetRedPlayer();
   Player& GetBluePlayer();
   std::vector<Bullet> GetBulletsInGame();
+  Map GetMap();
   
 private:
-  const float kPercent = 0.80;
+  const float kPercent = 0.40;
   const glm::vec2 kRedStart = glm::vec2(115, 115);
   const glm::vec2 kBlueStart = glm::vec2(585, 585);
   

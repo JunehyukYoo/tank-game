@@ -1,5 +1,5 @@
 #pragma once
-#include "glm/vec2.hpp"
+#include "bullet.h"
 
 namespace finalproject {
 /** Represents square walls with its respective variables */

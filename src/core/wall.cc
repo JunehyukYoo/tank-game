@@ -1,5 +1,4 @@
 #include "core/wall.h"
-#include <vector>
 
 namespace finalproject {
     

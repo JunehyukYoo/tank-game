@@ -63,6 +63,7 @@ list(APPEND SOURCE_FILES    ${CORE_SOURCE_FILES}
         src/visualizer/game_app.cc)
 
 list(APPEND TEST_FILES tests/test_game_status.cc
+                       tests/test_map.cc
                        tests/test_main.cc)
 
 ci_make_app(

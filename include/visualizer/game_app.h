@@ -23,6 +23,8 @@ public:
   
   /** Draws the tank muzzles */
   void DrawTankMuzzle(const Player& player);
+  
+  void DrawWalls();
 
   const double kWindowSize = 700;
   const double kMargin = 100;
