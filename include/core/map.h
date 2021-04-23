@@ -23,11 +23,18 @@ public:
    */
   void FillMapWithWalls(const float& percent_map_is_walls);
   
+  /**
+   * Returns if the current point is within spawn points for characters.
+   * @param x The x-coordinate
+   * @param y The y-coordinate
+   * @param dimension_of_spawn The spawn dimensions 
+   * @return True or false
+   */
   bool LookingAtSpawns(const size_t& x, const size_t& y, const float& dimension_of_spawn);
   
   /** Getters and setters */
-  std::vector<std::vector<bool>> GetMapOfBooleans() const;
-  std::vector<std::vector<Wall>> GetWalls();
+  std::vector<std::vector<bool>>& GetMapOfBooleans();
+  std::vector<std::vector<Wall>>& GetWalls();
 
 private:
   /** 2D vector of positions on the board and whether they are filled with a wall or not */

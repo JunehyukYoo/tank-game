@@ -54,11 +54,11 @@ bool Map::LookingAtSpawns(const size_t& x, const size_t& y, const float& dimensi
    }
 }
 
-std::vector<std::vector<bool>> Map::GetMapOfBooleans() const {
+std::vector<std::vector<bool>>& Map::GetMapOfBooleans() {
   return contains_walls_;
 }
 
-std::vector<std::vector<Wall>> Map::GetWalls() {
+std::vector<std::vector<Wall>>& Map::GetWalls() {
   return walls_in_map_;
 }
 }

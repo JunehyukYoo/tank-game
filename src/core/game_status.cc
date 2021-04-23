@@ -20,6 +20,7 @@ void GameStatus::ShootBullet(const Player &player) {
 }
 
 void GameStatus::AdvanceOneFrame() {
+  CheckBulletWallContact();
   CheckBulletPlayerContact();
   CheckBulletContainerContact();
 }
@@ -42,6 +43,40 @@ void GameStatus::CheckBulletContainerContact() {
       bullet.SetPosition(pos + vel);
     }
     count++;
+  }
+}
+
+void GameStatus::CheckBulletWallContact() {
+  if (bullets_in_game_.empty() || map_.GetMapOfBooleans().empty()) {
+    return;
+  }
+  std::vector<std::vector<bool>>& bool_values = map_.GetMapOfBooleans();
+  std::vector<std::vector<Wall>>& walls = map_.GetWalls();
+  for (size_t row = 0; row < bool_values.size(); row++) {
+    for (size_t col = 0; col < bool_values[0].size(); col++) {
+      if (bool_values[row][col]) {
+        Wall& curr_wall = walls[row][col];
+        size_t count = 0;
+        for (Bullet& bullet : bullets_in_game_) {
+          glm::vec2 bullet_pos = bullet.GetPosition();
+          if (bullet_pos.x >= curr_wall.top_left_.x &&
+              bullet_pos.x <= curr_wall.bottom_right_.x &&
+              bullet_pos.y >= curr_wall.top_left_.y &&
+              bullet_pos.y >= curr_wall.bottom_right_.y) {
+            if (curr_wall.health_ == 1) {
+              bool_values[row][col] = false;
+              curr_wall.top_left_ = glm::vec2(0,0);
+              curr_wall.bottom_right_ = glm::vec2(0, 0);
+              curr_wall.health_ = 0;
+            } else {
+              curr_wall.health_--;
+            }
+            bullets_in_game_.erase(bullets_in_game_.begin() + count);
+          }
+          count++;
+        }
+      }
+    }
   }
 }
 

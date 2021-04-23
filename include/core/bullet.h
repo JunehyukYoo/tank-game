@@ -36,7 +36,7 @@ private:
   ci::Color color_;
   float radius_;
   
-  constexpr const static float kDefaultLaunchSpeed = 10;
+  constexpr const static float kDefaultLaunchSpeed = 6;
   constexpr const static float kDefaultRadius = 5;
 };
     

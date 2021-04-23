@@ -33,6 +33,9 @@ public:
   /** Checks if bullets are coming into contact with players, and what to do then. */
   void CheckBulletPlayerContact();
   
+  /** Checks if bullets are coming into contact with walls **/
+  void CheckBulletWallContact();
+  
   /**
    * Checks if tank can move in the desired direction.
    * @param player The player and relevant information.
