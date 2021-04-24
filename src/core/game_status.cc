@@ -144,6 +144,10 @@ bool GameStatus::CanTankMoveInDir(const Player &player, const Player::Direction 
         return false;
       }
     }
+    //Checking for player wall collision if trying to move down
+    if (map_.ContainsWallAtPoint(this_pos + glm::vec2(0, radius + step)).first) {
+      return false;
+    }
   } else if (desired_move_dir == Player::Direction::LEFT) {
     //Checking for east container collision
     if (this_pos.x < kTopLeft.x + radius + step) {
@@ -155,6 +159,10 @@ bool GameStatus::CanTankMoveInDir(const Player &player, const Player::Direction 
         return false;
       }
     }
+    //Checking for player wall collision if trying to move left
+    if (map_.ContainsWallAtPoint(this_pos - glm::vec2(radius + step,0)).first) {
+      return false;
+    }
   } else if (desired_move_dir == Player::Direction::RIGHT) {
     //Checking for west container collision
     if (this_pos.x > kBottomRight.x - radius - step) {
@@ -165,6 +173,10 @@ bool GameStatus::CanTankMoveInDir(const Player &player, const Player::Direction 
       if (other_pos.x >= this_pos.x + radius && std::abs(glm::distance(this_pos.x, other_pos.x)) < step + 2 * radius) {
         return false;
       }
+    }
+    //Checking for player wall collision if trying to move right
+    if (map_.ContainsWallAtPoint(this_pos + glm::vec2(radius + step,0)).first) {
+      return false;
     }
   }
   return true;
