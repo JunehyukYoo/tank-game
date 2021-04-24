@@ -129,6 +129,10 @@ bool GameStatus::CanTankMoveInDir(const Player &player, const Player::Direction 
         return false;
       }
     }
+    //Checking for player wall collision if trying to move up
+    if (map_.ContainsWallAtPoint(this_pos - glm::vec2(0, radius + step)).first) {
+      return false;
+    }
   } else if (desired_move_dir == Player::Direction::DOWN) {
     //Checking for south container collision
     if (this_pos.y > kBottomRight.y - radius - step) {

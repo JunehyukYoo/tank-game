@@ -49,52 +49,58 @@ void GameApp::keyDown(ci::app::KeyEvent event) {
   Player& blue_player = game_status_.GetBluePlayer();
   switch (event.getCode()) {
     case ci::app::KeyEvent::KEY_w:
-      if (game_status_.CanTankMoveInDir(red_player, Player::Direction::UP)) {
+      if (game_status_.CanTankMoveInDir(red_player, Player::UP)) {
         red_player.MoveUp(); 
       }
+      red_player.SetDirection(Player::UP);
       break;
-
     case ci::app::KeyEvent::KEY_a:
-      if (game_status_.CanTankMoveInDir(red_player, Player::Direction::LEFT)) {
+      if (game_status_.CanTankMoveInDir(red_player, Player::LEFT)) {
         red_player.MoveLeft();
       }
-      
+      red_player.SetDirection(Player::LEFT);
       break;
       
     case ci::app::KeyEvent::KEY_s:
-      if (game_status_.CanTankMoveInDir(red_player, Player::Direction::DOWN)) {
+      if (game_status_.CanTankMoveInDir(red_player, Player::DOWN)) {
         red_player.MoveDown();
       }
+      red_player.SetDirection(Player::DOWN);
       break;
 
     case ci::app::KeyEvent::KEY_d:
-      if (game_status_.CanTankMoveInDir(red_player, Player::Direction::RIGHT)) {
+      if (game_status_.CanTankMoveInDir(red_player, Player::RIGHT)) {
         red_player.MoveRight();
       }
+      red_player.SetDirection(Player::RIGHT);
       break;
 
     case ci::app::KeyEvent::KEY_i:
-      if (game_status_.CanTankMoveInDir(blue_player, Player::Direction::UP)) {
+      if (game_status_.CanTankMoveInDir(blue_player, Player::UP)) {
         blue_player.MoveUp();
       }
+      blue_player.SetDirection(Player::UP);
       break;
 
     case ci::app::KeyEvent::KEY_j:
-      if (game_status_.CanTankMoveInDir(blue_player, Player::Direction::LEFT)) {
+      if (game_status_.CanTankMoveInDir(blue_player, Player::LEFT)) {
         blue_player.MoveLeft();
       }
+      blue_player.SetDirection(Player::LEFT);
       break;
 
     case ci::app::KeyEvent::KEY_k:
-      if (game_status_.CanTankMoveInDir(blue_player, Player::Direction::DOWN)) {
+      if (game_status_.CanTankMoveInDir(blue_player, Player::DOWN)) {
         blue_player.MoveDown();
       }
+      blue_player.SetDirection(Player::DOWN);
       break;
 
     case ci::app::KeyEvent::KEY_l:
-      if (game_status_.CanTankMoveInDir(blue_player, Player::Direction::RIGHT)) {
+      if (game_status_.CanTankMoveInDir(blue_player, Player::RIGHT)) {
         blue_player.MoveRight();
       }
+      blue_player.SetDirection(Player::RIGHT);
       break;
       
     case ci::app::KeyEvent::KEY_SPACE:

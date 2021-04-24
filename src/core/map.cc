@@ -54,14 +54,14 @@ bool Map::LookingAtSpawns(const size_t& x, const size_t& y, const float& dimensi
    }
 }
 
-std::pair<bool, std::pair<size_t, size_t>> Map::ContainsWallAtPoint(const glm::vec2 &position) {
+std::pair<bool, std::pair<size_t, size_t>> Map::ContainsWallAtPoint(const glm::vec2 &position) const{
   if (walls_in_map_.empty()) {
     return {false, {0,0}};
   }
   for (size_t row = 0; row < walls_in_map_.size( ); row++) {
     for (size_t col = 0; col < walls_in_map_[0].size(); col++) {
       if (contains_walls_[row][col]) {
-        Wall& curr_wall = walls_in_map_[row][col];
+        Wall curr_wall = walls_in_map_[row][col];
         if (position.x >= curr_wall.top_left_.x &&
             position.x <= curr_wall.bottom_right_.x &&
             position.y >= curr_wall.top_left_.y &&

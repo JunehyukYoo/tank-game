@@ -32,7 +32,7 @@ public:
    */
   bool LookingAtSpawns(const size_t& x, const size_t& y, const float& dimension_of_spawn);
   
-  std::pair<bool, std::pair<size_t, size_t>> ContainsWallAtPoint(const glm::vec2& position);
+  std::pair<bool, std::pair<size_t, size_t>> ContainsWallAtPoint(const glm::vec2& position) const;
   
   
   /** Getters and setters */
