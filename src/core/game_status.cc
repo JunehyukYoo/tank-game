@@ -53,8 +53,21 @@ void GameStatus::CheckBulletWallContact() {
   size_t count = 0;
   for (Bullet& bullet : bullets_in_game_) {
     glm::vec2 bullet_pos = bullet.GetPosition();
-    if (map_.ContainsWallAtPointThenDelete(bullet_pos)) {
+    std::pair<bool, std::pair<size_t, size_t>> result = map_.ContainsWallAtPoint(bullet_pos);
+    if (result.first) {
+      size_t row = result.second.first;
+      size_t col = result.second.second;
       bullets_in_game_.erase(bullets_in_game_.begin() + count);
+      Wall& curr_wall = map_.GetWalls()[row][col];
+      if (curr_wall.health_ == 1) {
+        std::vector<std::vector<bool>>& bool_map = map_.GetMapOfBooleans();
+        bool_map[row][col] = false;
+        curr_wall.top_left_ = glm::vec2(0,0);
+        curr_wall.bottom_right_ = glm::vec2(0, 0);
+        curr_wall.health_ = 0;
+      } else {
+        curr_wall.health_--;
+      }
     }
     count++;
   }
@@ -92,6 +105,7 @@ void GameStatus::CheckBulletPlayerContact() {
   }
 }
 
+
 bool GameStatus::CanTankMoveInDir(const Player &player, const Player::Direction desired_move_dir) const {
   glm::vec2 this_pos = player.GetPosition();
   Player other;
@@ -105,36 +119,44 @@ bool GameStatus::CanTankMoveInDir(const Player &player, const Player::Direction 
   glm::vec2 other_pos = other.GetPosition();
   
   if (desired_move_dir == Player::Direction::UP) {
+    //Checking for north container collision
     if (this_pos.y <= kTopLeft.y + radius + step) {
       return false;
     }
+    //Checking player/player collision if trying to move up
     if (std::abs(glm::distance(this_pos.x, other_pos.x)) < 2 * radius) {
       if (other_pos.y <= this_pos.y - radius && std::abs(glm::distance(this_pos.y, other_pos.y)) < step + 2 * radius) {
         return false;
       }
     }
   } else if (desired_move_dir == Player::Direction::DOWN) {
+    //Checking for south container collision
     if (this_pos.y > kBottomRight.y - radius - step) {
       return false;
     }
+    //Checking player/player collision if trying to move down
     if (std::abs(glm::distance(this_pos.x, other_pos.x)) < 2 * radius) {
       if (other_pos.y >= this_pos.y + radius && std::abs(glm::distance(this_pos.y, other_pos.y)) < step + 2 * radius) {
         return false;
       }
     }
   } else if (desired_move_dir == Player::Direction::LEFT) {
+    //Checking for east container collision
     if (this_pos.x < kTopLeft.x + radius + step) {
       return false;
     }
+    //Checking player/player collision if trying to move left
     if (std::abs(glm::distance(this_pos.y, other_pos.y)) < 2 * radius) {
       if (other_pos.x <= this_pos.x - radius && std::abs(glm::distance(this_pos.x, other_pos.x)) < step + 2 * radius) {
         return false;
       }
     }
   } else if (desired_move_dir == Player::Direction::RIGHT) {
+    //Checking for west container collision
     if (this_pos.x > kBottomRight.x - radius - step) {
       return false;
     }
+    //Checking player/player collision if trying to move right
     if (std::abs(glm::distance(this_pos.y, other_pos.y)) < 2 * radius) {
       if (other_pos.x >= this_pos.x + radius && std::abs(glm::distance(this_pos.x, other_pos.x)) < step + 2 * radius) {
         return false;
@@ -159,6 +181,4 @@ std::vector<Bullet> GameStatus::GetBulletsInGame() {
 Map GameStatus::GetMap() {
   return map_;
 }
-
-
 } // namespace finalproject

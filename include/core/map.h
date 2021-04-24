@@ -32,12 +32,7 @@ public:
    */
   bool LookingAtSpawns(const size_t& x, const size_t& y, const float& dimension_of_spawn);
   
-  /**
-   * Checks if there is a wall at a position and deletes or reduces health of specific wall if true.
-   * @param position The position to check at.
-   * @return True or false
-   */
-  bool ContainsWallAtPointThenDelete(const glm::vec2& position);
+  std::pair<bool, std::pair<size_t, size_t>> ContainsWallAtPoint(const glm::vec2& position);
   
   
   /** Getters and setters */
