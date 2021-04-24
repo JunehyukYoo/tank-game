@@ -54,6 +54,34 @@ bool Map::LookingAtSpawns(const size_t& x, const size_t& y, const float& dimensi
    }
 }
 
+bool Map::ContainsWallAtPointThenDelete(const glm::vec2 &position) {
+  if (walls_in_map_.empty()) {
+    return false;
+  }
+  for (size_t row = 0; row < walls_in_map_.size( ); row++) {
+    for (size_t col = 0; col < walls_in_map_[0].size(); col++) {
+      if (contains_walls_[row][col]) {
+        Wall& curr_wall = walls_in_map_[row][col];
+        if (position.x > curr_wall.top_left_.x &&
+            position.x < curr_wall.bottom_right_.x &&
+            position.y > curr_wall.top_left_.y &&
+            position.y < curr_wall.bottom_right_.y) {
+          if (curr_wall.health_ == 1) {
+            contains_walls_[row][col] = false;
+            curr_wall.top_left_ = glm::vec2(0,0);
+            curr_wall.bottom_right_ = glm::vec2(0, 0);
+            curr_wall.health_ = 0;
+          } else {
+            curr_wall.health_--;
+          }
+          return true;
+        }
+      }
+    }
+  }
+  return false;
+}
+
 std::vector<std::vector<bool>>& Map::GetMapOfBooleans() {
   return contains_walls_;
 }

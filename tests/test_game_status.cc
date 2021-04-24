@@ -85,7 +85,7 @@ TEST_CASE("Testing bullet functionality") {
     REQUIRE(bullet.GetRadius() == 5);
     REQUIRE(bullet.GetPosition() == glm::vec2(300, 300));
     REQUIRE(bullet.GetColor() == ci::Color("red"));
-    REQUIRE(bullet.GetVelocity() == glm::vec2(10, 0));
+    REQUIRE(bullet.GetVelocity() == glm::vec2(6, 0));
   }
   
   SECTION("Bullet hits container") {
