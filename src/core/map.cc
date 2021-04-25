@@ -74,6 +74,17 @@ std::pair<bool, std::pair<size_t, size_t>> Map::ContainsWallAtPoint(const glm::v
   return {false, {0,0}};
 }
 
+void Map::EmptyMap() {
+  for (size_t row = 0; row < contains_walls_.size(); row++) {
+    for (size_t col = 0; col < contains_walls_[0].size(); col++) {
+      contains_walls_[row][col] = false;
+      walls_in_map_[row][col].health_ = 0;
+      walls_in_map_[row][col].top_left_ = glm::vec2(0, 0);
+      walls_in_map_[row][col].bottom_right_ = glm::vec2(0, 0);
+    }
+  }
+}
+
 std::vector<std::vector<bool>>& Map::GetMapOfBooleans() {
   return contains_walls_;
 }
@@ -81,4 +92,5 @@ std::vector<std::vector<bool>>& Map::GetMapOfBooleans() {
 std::vector<std::vector<Wall>>& Map::GetWalls() {
   return walls_in_map_;
 }
+
 }

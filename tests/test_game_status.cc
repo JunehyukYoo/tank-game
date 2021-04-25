@@ -3,11 +3,6 @@
 #include "core/game_status.h"
 #include "core/bullet.h"
 #include "core/player.h"
-#include "core/map.h"
-
-TEST_CASE("Sanity check") {
-  REQUIRE(1 < 2);
-}
 
 TEST_CASE("Testing game initialization") {
   finalproject::GameStatus game;
@@ -35,6 +30,11 @@ TEST_CASE("Test player movement") {
   finalproject::GameStatus game;
   finalproject::Player red_player = game.GetRedPlayer();
   red_player.SetPosition(glm::vec2(300, 300));
+  
+  //code to ignore walls
+  finalproject::Map& map = game.GetMap();
+  map.EmptyMap();
+
   REQUIRE(game.CanTankMoveInDir(red_player, finalproject::Player::DOWN));
   REQUIRE(game.CanTankMoveInDir(red_player, finalproject::Player::LEFT));
   REQUIRE(game.CanTankMoveInDir(red_player, finalproject::Player::RIGHT));
@@ -72,6 +72,10 @@ TEST_CASE("Testing bullet functionality") {
   player.SetColor(ci::Color("red"));
   player.SetDirection(finalproject::Player::RIGHT);
   player.SetPosition(glm::vec2(300, 300));
+
+  //code to ignore walls
+  finalproject::Map& map = game.GetMap();
+  map.EmptyMap();
   
   SECTION("Adding/shooting bullets") {
     REQUIRE(game.GetBulletsInGame().size() == 0);

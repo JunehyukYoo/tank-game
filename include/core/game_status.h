@@ -45,12 +45,11 @@ public:
    */
   bool CanTankMoveInDir(const Player& player, const Player::Direction desired_move_dir) const;
   
-  
   /** Getters */
   Player& GetRedPlayer();
   Player& GetBluePlayer();
   std::vector<Bullet> GetBulletsInGame();
-  Map GetMap();
+  Map& GetMap();
   
 private:
   const float kPercent = 0.40;

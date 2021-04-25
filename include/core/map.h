@@ -32,8 +32,16 @@ public:
    */
   bool LookingAtSpawns(const size_t& x, const size_t& y, const float& dimension_of_spawn);
   
+  /**
+   * A pair to check whether there is a wall at a certain point. If true, return the boolean and row & col of the 
+   * specific wall. Otherwise return false and (0,0).
+   * @param position The position to check.
+   * @return The bool and corresponding point within the Wall vector.
+   */
   std::pair<bool, std::pair<size_t, size_t>> ContainsWallAtPoint(const glm::vec2& position) const;
   
+  /** Method to empty vectors for testing purposes. */
+  void EmptyMap();
   
   /** Getters and setters */
   std::vector<std::vector<bool>>& GetMapOfBooleans();
