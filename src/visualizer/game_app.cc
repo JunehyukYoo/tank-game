@@ -21,7 +21,9 @@ void GameApp::setup() {
   ci::Surface bitmap_right(image_right);
   ci::Surface bitmap_left(image_left);
 
+  //dimensions of the image
   ci::Area area(0, 0, 512, 492);
+  
   InitializeImageColors(bitmap_up, ci::Color("red"), area);
   InitializeImageColors(bitmap_left, ci::Color("red"), area);
   InitializeImageColors(bitmap_right, ci::Color("red"), area);
@@ -47,12 +49,14 @@ void GameApp::setup() {
 void GameApp::InitializeImageColors(ci::Surface &surface, const ci::Color& color, const ci::Area& area) {
   ci::Surface::Iter iter = surface.getIter(area);
   if (color == ci::Color("red")) {
+    //Changing the image to be red
     while (iter.line()) {
       while (iter.pixel()) {
         iter.r() = 255 - iter.r();
       }
     }
   } else {
+    //Changing the image to be blue
     while (iter.line()) {
       while (iter.pixel()) {
         iter.b() = 255 - iter.b();

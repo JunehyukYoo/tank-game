@@ -28,12 +28,19 @@ public:
   /** Draw walls */
   void DrawWalls();
   
+  /**
+   * Initializes the images with special coloring.
+   * @param surface The surface/image to alter the color of.
+   * @param color The color to alter to.
+   * @param area The dimensions of the image.
+   */
   void InitializeImageColors(ci::Surface& surface, const ci::Color& color, const ci::Area& area);
 
   const double kWindowSize = 700;
   const double kMargin = 100;
   
 private:
+  /** Tank image paths */
   const std::string kTankUpImage = "/Users/s200808/Documents/Cinder/my-projects/final-project-JunehyukYoo/data/tanks/tank_up.png";
   const std::string kTankLeftImage = "/Users/s200808/Documents/Cinder/my-projects/final-project-JunehyukYoo/data/tanks/tank_left.png";
   const std::string kTankRightImage = "/Users/s200808/Documents/Cinder/my-projects/final-project-JunehyukYoo/data/tanks/tank_right.png";
@@ -42,7 +49,6 @@ private:
   GameStatus game_status_;
   std::unordered_map<Player::Direction, ci::gl::Texture2dRef,  std::hash<int>> red_tank_images;
   std::unordered_map<Player::Direction, ci::gl::Texture2dRef, std::hash<int>> blue_tank_images;
-
   
   const ci::Color kDefaultColor = ci::Color("white");
   const ci::Color kBackgroundColor = ci::Color("black"); 
