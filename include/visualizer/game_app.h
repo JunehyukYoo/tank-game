@@ -41,7 +41,7 @@ private:
 
   GameStatus game_status_;
   std::unordered_map<Player::Direction, ci::gl::Texture2dRef,  std::hash<int>> red_tank_images;
-  //std::unordered_map<Player::Direction, ci::gl::Texture2dRef> blue_tank_images;
+  std::unordered_map<Player::Direction, ci::gl::Texture2dRef, std::hash<int>> blue_tank_images;
 
   
   const ci::Color kDefaultColor = ci::Color("white");

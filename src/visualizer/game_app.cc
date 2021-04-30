@@ -31,6 +31,16 @@ void GameApp::setup() {
   red_tank_images.insert({Player::DOWN, ci::gl::Texture2d::create(bitmap_down)});
   red_tank_images.insert({Player::LEFT, ci::gl::Texture2d::create(bitmap_left)});
   red_tank_images.insert({Player::RIGHT, ci::gl::Texture2d::create(bitmap_right)});
+
+  InitializeImageColors(bitmap_up, ci::Color("blue"), area);
+  InitializeImageColors(bitmap_left, ci::Color("blue"), area);
+  InitializeImageColors(bitmap_right, ci::Color("blue"), area);
+  InitializeImageColors(bitmap_down, ci::Color("blue"), area);
+
+  blue_tank_images.insert({Player::UP, ci::gl::Texture2d::create(bitmap_up)});
+  blue_tank_images.insert({Player::DOWN, ci::gl::Texture2d::create(bitmap_down)});
+  blue_tank_images.insert({Player::LEFT, ci::gl::Texture2d::create(bitmap_left)});
+  blue_tank_images.insert({Player::RIGHT, ci::gl::Texture2d::create(bitmap_right)});
   
 }
 
@@ -46,6 +56,7 @@ void GameApp::InitializeImageColors(ci::Surface &surface, const ci::Color& color
     while (iter.line()) {
       while (iter.pixel()) {
         iter.b() = 255 - iter.b();
+        iter.g() = 100 - iter.g();
       }
     } 
   }
@@ -74,16 +85,20 @@ void GameApp::draw() {
 
     //ci::gl::color(red_player.GetColor());
     //ci::gl::drawSolidCircle(red_player.GetPosition(), Player::kTankDimensions);
-    ci::gl::Texture2dRef texture = red_tank_images.find(red_player.GetDirection())->second;
-    ci::Rectf dimensions(red_player.GetPosition() - glm::vec2(25, 25), red_player.GetPosition() + glm::vec2(25,25));
-    ci::gl::draw(texture, dimensions);
+    glm::vec2 tank_dim_as_vec(Player::kTankDimensions * 2, Player::kTankDimensions * 2);
+    ci::gl::Texture2dRef texture_red = red_tank_images.find(red_player.GetDirection())->second;
+    ci::Rectf dimensions_red(red_player.GetPosition() - tank_dim_as_vec, red_player.GetPosition() + tank_dim_as_vec);
+    ci::gl::draw(texture_red, dimensions_red);
 
-    ci::gl::color(blue_player.GetColor());
-    ci::gl::drawSolidCircle(blue_player.GetPosition(), Player::kTankDimensions);
+    //ci::gl::color(blue_player.GetColor());
+    //ci::gl::drawSolidCircle(blue_player.GetPosition(), Player::kTankDimensions);
+    ci::gl::Texture2dRef texture_blue = blue_tank_images.find(blue_player.GetDirection())->second;
+    ci::Rectf dimensions_blue(blue_player.GetPosition() - tank_dim_as_vec, blue_player.GetPosition() + tank_dim_as_vec);
+    ci::gl::draw(texture_blue, dimensions_blue);
 
     DrawBullets(); 
     //DrawTankMuzzle(red_player);
-    DrawTankMuzzle(blue_player);
+    //DrawTankMuzzle(blue_player);
     DrawWalls();
   }
 }
