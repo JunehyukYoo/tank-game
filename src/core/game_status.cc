@@ -22,6 +22,7 @@ void GameStatus::ShootBullet(const Player &player) {
 void GameStatus::AdvanceOneFrame() {
   CheckBulletWallContact();
   CheckBulletPlayerContact();
+  CheckPlayerPowerUpContact();
   CheckBulletContainerContact();
 }
 
@@ -101,10 +102,32 @@ void GameStatus::CheckBulletPlayerContact() {
   if (is_contact) {
     bullets_in_game_.clear();
     player_red_.SetPosition(kRedStart);
+    player_red_.SetPoweredUpStatus(false);
     player_blue_.SetPosition(kBlueStart);
+    player_blue_.SetPoweredUpStatus(false);
   }
 }
 
+void GameStatus::CheckPlayerPowerUpContact() {
+  std::vector<PowerUp>& power_ups = map_.GetPowerUps();
+  if (power_ups.empty()) {
+    return;
+  }
+  glm::vec2 red_pos = player_red_.GetPosition();
+  glm::vec2 blue_pos = player_blue_.GetPosition();
+  float player_radius = Player::kTankDimensions;
+  for (size_t i = 0; i < power_ups.size(); i++) {
+    PowerUp power_up = power_ups[i];
+    if (glm::distance(power_up.GetPosition(), red_pos) <= player_radius + power_up.GetRadius()) {
+      player_red_.SetPoweredUpStatus(true);
+      power_ups.erase(power_ups.begin() + i);
+      
+    } else if (glm::distance(power_up.GetPosition(), blue_pos) <= player_radius + power_up.GetRadius()) {
+      player_blue_.SetPoweredUpStatus(true);
+      power_ups.erase(power_ups.begin() + i);
+    }
+  }
+}
 
 bool GameStatus::CanTankMoveInDir(const Player &player, const Player::Direction desired_move_dir) const {
   glm::vec2 this_pos = player.GetPosition();

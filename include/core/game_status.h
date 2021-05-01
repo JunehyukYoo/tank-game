@@ -36,6 +36,9 @@ public:
   /** Checks if bullets are coming into contact with walls **/
   void CheckBulletWallContact();
   
+  /** Checks if the player is coming into contact with a power up, and how that affects a player */
+  void CheckPlayerPowerUpContact();
+  
   
   /**
    * Checks if tank can move in the desired direction.
