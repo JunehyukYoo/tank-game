@@ -15,35 +15,47 @@ void GameApp::setup() {
   auto image_down = ci::loadImage(kTankDownImage);
   auto image_right = ci::loadImage(kTankRightImage);
   auto image_left = ci::loadImage(kTankLeftImage);
+  auto image_wall_uncracked = ci::loadImage(kWallUncrackedImage);
+  auto image_wall_cracked_1 = ci::loadImage(kWallCracked1Image);
+  auto image_wall_cracked_2 = ci::loadImage(kWallCracked2Image);
+  auto image_wall_cracked_3 = ci::loadImage(kWallCracked3Image);
 
   ci::Surface bitmap_up(image_up);
   ci::Surface bitmap_down(image_down);
   ci::Surface bitmap_right(image_right);
   ci::Surface bitmap_left(image_left);
+  ci::Surface bitmap_wall_uncracked(image_wall_uncracked);
+  ci::Surface bitmap_wall_cracked_1(image_wall_cracked_1);
+  ci::Surface bitmap_wall_cracked_2(image_wall_cracked_2);
+  ci::Surface bitmap_wall_cracked_3(image_wall_cracked_3);
 
-  //dimensions of the image
-  ci::Area area(0, 0, 512, 492);
+  //dimensions of the tank images
+  ci::Area tank_area(0, 0, 512, 492);
   
-  InitializeImageColors(bitmap_up, ci::Color("red"), area);
-  InitializeImageColors(bitmap_left, ci::Color("red"), area);
-  InitializeImageColors(bitmap_right, ci::Color("red"), area);
-  InitializeImageColors(bitmap_down, ci::Color("red"), area);
+  InitializeImageColors(bitmap_up, ci::Color("red"), tank_area);
+  InitializeImageColors(bitmap_left, ci::Color("red"), tank_area);
+  InitializeImageColors(bitmap_right, ci::Color("red"), tank_area);
+  InitializeImageColors(bitmap_down, ci::Color("red"), tank_area);
   
   red_tank_images.insert({Player::UP, ci::gl::Texture2d::create(bitmap_up)});
   red_tank_images.insert({Player::DOWN, ci::gl::Texture2d::create(bitmap_down)});
   red_tank_images.insert({Player::LEFT, ci::gl::Texture2d::create(bitmap_left)});
   red_tank_images.insert({Player::RIGHT, ci::gl::Texture2d::create(bitmap_right)});
 
-  InitializeImageColors(bitmap_up, ci::Color("blue"), area);
-  InitializeImageColors(bitmap_left, ci::Color("blue"), area);
-  InitializeImageColors(bitmap_right, ci::Color("blue"), area);
-  InitializeImageColors(bitmap_down, ci::Color("blue"), area);
+  InitializeImageColors(bitmap_up, ci::Color("blue"), tank_area);
+  InitializeImageColors(bitmap_left, ci::Color("blue"), tank_area);
+  InitializeImageColors(bitmap_right, ci::Color("blue"), tank_area);
+  InitializeImageColors(bitmap_down, ci::Color("blue"), tank_area);
 
   blue_tank_images.insert({Player::UP, ci::gl::Texture2d::create(bitmap_up)});
   blue_tank_images.insert({Player::DOWN, ci::gl::Texture2d::create(bitmap_down)});
   blue_tank_images.insert({Player::LEFT, ci::gl::Texture2d::create(bitmap_left)});
   blue_tank_images.insert({Player::RIGHT, ci::gl::Texture2d::create(bitmap_right)});
   
+  wall_images.insert({4, ci::gl::Texture2d::create(bitmap_wall_uncracked)});
+  wall_images.insert({3, ci::gl::Texture2d::create(bitmap_wall_cracked_1)});
+  wall_images.insert({2, ci::gl::Texture2d::create(bitmap_wall_cracked_2)});
+  wall_images.insert({1, ci::gl::Texture2d::create(bitmap_wall_cracked_3)});
 }
 
 void GameApp::InitializeImageColors(ci::Surface &surface, const ci::Color& color, const ci::Area& area) {
@@ -225,7 +237,12 @@ void GameApp::DrawWalls() {
   for (size_t row = 0; row < map.size(); row++) {
     for (size_t col = 0; col < map[0].size(); col++) {
       Wall wall = map[row][col];
-      ci::gl::drawSolidRect(ci::Rectf(wall.top_left_, wall.bottom_right_));
+      if (wall.health_ != 0) {
+        ci::gl::Texture2dRef wall_texture = wall_images.find(wall.health_)->second;
+        ci::Rectf wall_dimensions(wall.top_left_, wall.bottom_right_);
+        ci::gl::draw(wall_texture, wall_dimensions);
+      }
+      //ci::gl::drawSolidRect(ci::Rectf(wall.top_left_, wall.bottom_right_));
     }
   }
 }
