@@ -2,6 +2,9 @@
 #include <core/player.h>
 #include "core/bullet.h"
 #include "core/map.h"
+#include <cmath>
+
+#define PI 3.14159265
 
 namespace finalproject {
 
@@ -17,6 +20,28 @@ GameStatus::GameStatus() {
 void GameStatus::ShootBullet(const Player &player) {
   Bullet bullet(player);
   bullets_in_game_.push_back(bullet);
+}
+
+void GameStatus::ShootPowerUpBullet(const Player &player) {
+  ShootBullet(player);
+  Bullet bullet_angled_one(player);
+  Bullet bullet_angled_two(player);
+  glm::vec2 angled_vel_one = bullet_angled_one.GetVelocity();
+  glm::vec2 angled_vel_two = bullet_angled_two.GetVelocity();
+  ChangeAngleOfBullet(PI/6, angled_vel_one);
+  ChangeAngleOfBullet(-PI/6, angled_vel_two);
+  bullet_angled_one.SetVelocity(angled_vel_one);
+  bullet_angled_two.SetVelocity(angled_vel_two);
+  bullets_in_game_.push_back(bullet_angled_one);
+  bullets_in_game_.push_back(bullet_angled_two);
+}
+
+void GameStatus::ChangeAngleOfBullet(const float &angle, glm::vec2 &original_vector) {
+  float x = original_vector.x;
+  float y = original_vector.y;
+  auto magnitude = sqrt(pow(x,2) + pow(y,2));
+  float altered_angle = atan(y/x) + angle;
+  original_vector = glm::vec2(magnitude * cos(altered_angle), magnitude * sin(altered_angle));
 }
 
 void GameStatus::AdvanceOneFrame() {
@@ -105,6 +130,7 @@ void GameStatus::CheckBulletPlayerContact() {
     player_red_.SetPoweredUpStatus(false);
     player_blue_.SetPosition(kBlueStart);
     player_blue_.SetPoweredUpStatus(false);
+    map_.FillMapWithPowerUps(kNumPowerUps);
   }
 }
 

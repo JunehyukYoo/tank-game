@@ -20,9 +20,22 @@ public:
   
   /**
    * Method to shoot a bullet.
-   * @param player The player who shot the bullet.
+   * @param player The player who shot the bullet
    */
   void ShootBullet(const Player& player);
+  
+  /**
+   * Method to shoot a powered up bullet.
+   * @param player The player who shot the bullet
+   */
+  void ShootPowerUpBullet(const Player& player);
+  
+  /**
+   * Method used to angle a velocity vector for shooting bullets.
+   * @param angle The angle to change by
+   * @param original_vector The original vector
+   */
+  void ChangeAngleOfBullet(const float& angle, glm::vec2& original_vector);
   
   /** Advances one frame within the game. Used for bullet trajectory calculation. */
   void AdvanceOneFrame();

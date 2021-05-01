@@ -28,7 +28,7 @@ public:
   ci::Color GetColor() const;
   float GetRadius() const;
   void SetPosition(const glm::vec2& new_pos);
-  
+  void SetVelocity(const glm::vec2& new_vel);
   
 private:
   glm::vec2 position_;

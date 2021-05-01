@@ -180,11 +180,19 @@ void GameApp::keyDown(ci::app::KeyEvent event) {
       break;
       
     case ci::app::KeyEvent::KEY_SPACE:
-      game_status_.ShootBullet(red_player);
+      if (!red_player.GetPoweredUpStatus()) {
+        game_status_.ShootBullet(red_player);
+      } else {
+        game_status_.ShootPowerUpBullet(red_player);
+      }
       break;
 
     case ci::app::KeyEvent::KEY_UP:
-      game_status_.ShootBullet(blue_player);
+      if (!blue_player.GetPoweredUpStatus()) {
+        game_status_.ShootBullet(blue_player);
+      } else {
+        game_status_.ShootPowerUpBullet(blue_player);
+      }
       break;
   }
 }

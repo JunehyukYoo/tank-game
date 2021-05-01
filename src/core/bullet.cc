@@ -46,4 +46,8 @@ void Bullet::SetPosition(const glm::vec2 &new_pos) {
   position_ = new_pos;
 }
 
+void Bullet::SetVelocity(const glm::vec2 &new_vel) {
+  velocity_ = new_vel;
+}
+
 } // namespace finalproject
