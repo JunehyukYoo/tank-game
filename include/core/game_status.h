@@ -53,13 +53,14 @@ public:
   
 private:
   const float kPercent = 0.40;
+  const size_t kNumPowerUps = 5;
   const glm::vec2 kRedStart = glm::vec2(115, 115);
   const glm::vec2 kBlueStart = glm::vec2(585, 585);
   
   Player player_red_;
   Player player_blue_;
   std::vector<Bullet> bullets_in_game_;
-  Map map_ = Map(kTopLeft, kBottomRight, kPercent);
+  Map map_ = Map(kTopLeft, kBottomRight, kPercent, kNumPowerUps);
 };
     
 }

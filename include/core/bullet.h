@@ -20,7 +20,7 @@ public:
    * Calculates the velocity of a new bullet from the direction the player is facing.
    * @param direction The direction the player is facing.
    */
-  void CalculateVelocityFromDirection(Player::Direction direction);
+  glm::vec2 CalculateVelocityFromDirection(Player::Direction direction);
   
   /** Getters and setters */
   glm::vec2 GetPosition();

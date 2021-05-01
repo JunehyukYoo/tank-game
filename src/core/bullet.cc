@@ -9,18 +9,18 @@ Bullet::Bullet(const Player& player) {
   color_ = player.GetColor();
   radius_ = kDefaultRadius;
   Player::Direction direction = player.GetDirection();
-  CalculateVelocityFromDirection(direction);
+  velocity_ = CalculateVelocityFromDirection(direction);
 }
 
-void Bullet::CalculateVelocityFromDirection(Player::Direction direction) {
+glm::vec2 Bullet::CalculateVelocityFromDirection(Player::Direction direction) {
   if (direction == Player::Direction::UP) {
-    velocity_ = glm::vec2(0, -1 * kDefaultLaunchSpeed);
+    return glm::vec2(0, -1 * kDefaultLaunchSpeed);
   } else if (direction == Player::Direction::DOWN) {
-    velocity_ = glm::vec2(0, kDefaultLaunchSpeed);
+    return glm::vec2(0, kDefaultLaunchSpeed);
   } else if (direction == Player::Direction::LEFT) {
-    velocity_ = glm::vec2(-1 * kDefaultLaunchSpeed, 0);
+    return glm::vec2(-1 * kDefaultLaunchSpeed, 0);
   } else if (direction == Player::Direction::RIGHT) {
-    velocity_ = glm::vec2(kDefaultLaunchSpeed, 0);
+    return glm::vec2(kDefaultLaunchSpeed, 0);
   } else {
     throw std::invalid_argument("Invalid direction for calculating bullet velocity");
   }

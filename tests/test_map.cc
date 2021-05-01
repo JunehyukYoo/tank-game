@@ -8,7 +8,7 @@ TEST_CASE("Map is initialized correctly") {
   finalproject::GameStatus game;
   finalproject::Map map = game.GetMap();
   std::vector<std::vector<finalproject::Wall>> walls = map.GetWalls();
-  std::vector<std::vector<bool>> bool_map = map.GetMapOfBooleans();
+  std::vector<std::vector<bool>> bool_map = map.GetMapOfWallBooleans();
   REQUIRE(walls.size() == 20);
   REQUIRE(walls[0].size() == 20);
   REQUIRE(map.GetWalls().empty() == false);
@@ -52,7 +52,7 @@ TEST_CASE("Bullet wall collision") {
   map.EmptyMap();
   
   //Adding in walls in top left and bottom right corners
-  std::vector<std::vector<bool>>& bool_map = map.GetMapOfBooleans();
+  std::vector<std::vector<bool>>& bool_map = map.GetMapOfWallBooleans();
   std::vector<std::vector<finalproject::Wall>>& walls = map.GetWalls();
   bool_map[0][0] = true;
   bool_map[19][19] = true;
@@ -136,7 +136,7 @@ TEST_CASE("Player movement against walls") {
   map.EmptyMap();
 
   //Adding in walls in top left and bottom right corners
-  std::vector<std::vector<bool>>& bool_map = map.GetMapOfBooleans();
+  std::vector<std::vector<bool>>& bool_map = map.GetMapOfWallBooleans();
   std::vector<std::vector<finalproject::Wall>>& walls = map.GetWalls();
   bool_map[0][0] = true;
   bool_map[19][19] = true;

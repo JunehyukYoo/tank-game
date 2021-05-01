@@ -54,9 +54,16 @@ Player::Direction Player::GetDirection() const {
   return direction_;
 }
 
+bool Player::GetPoweredUpStatus() const {
+  return powered_up_;
+}
+
 void Player::SetScore(const size_t &score) {
   score_ = score;
 }
-    
 
+void Player::SetPoweredUpStatus(const bool& boolean) {
+  powered_up_ = boolean;
 }
+
+} // namespace finalproject

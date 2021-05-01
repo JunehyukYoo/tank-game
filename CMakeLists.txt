@@ -57,7 +57,8 @@ list(APPEND CORE_SOURCE_FILES src/core/player.cc
                               src/core/game_status.cc
                               src/core/bullet.cc
                               src/core/map.cc
-                              src/core/wall.cc)
+                              src/core/wall.cc
+                              src/core/power_up.cc)
 
 list(APPEND SOURCE_FILES    ${CORE_SOURCE_FILES}
         src/visualizer/game_app.cc)

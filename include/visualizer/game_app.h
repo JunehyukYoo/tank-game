@@ -28,6 +28,9 @@ public:
   /** Draw walls */
   void DrawWalls();
   
+  /** Draws power ups */
+  void DrawPowerUps();
+  
   /**
    * Initializes the images with special coloring.
    * @param surface The surface/image to alter the color of.
@@ -58,6 +61,7 @@ private:
 
   const ci::Color kDefaultColor = ci::Color("white");
   const ci::Color kBackgroundColor = ci::Color("black"); 
+  const ci::Color kPowerUpColor = ci::Color("green");
 };
 
 } // namespace visualizer

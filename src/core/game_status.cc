@@ -47,7 +47,7 @@ void GameStatus::CheckBulletContainerContact() {
 }
 
 void GameStatus::CheckBulletWallContact() {
-  if (bullets_in_game_.empty() || map_.GetMapOfBooleans().empty()) {
+  if (bullets_in_game_.empty() || map_.GetMapOfWallBooleans().empty()) {
     return;
   }
   size_t count = 0;
@@ -60,7 +60,7 @@ void GameStatus::CheckBulletWallContact() {
       bullets_in_game_.erase(bullets_in_game_.begin() + count);
       Wall& curr_wall = map_.GetWalls()[row][col];
       if (curr_wall.health_ == 1) {
-        std::vector<std::vector<bool>>& bool_map = map_.GetMapOfBooleans();
+        std::vector<std::vector<bool>>& bool_map = map_.GetMapOfWallBooleans();
         bool_map[row][col] = false;
         curr_wall.top_left_ = glm::vec2(0,0);
         curr_wall.bottom_right_ = glm::vec2(0, 0);

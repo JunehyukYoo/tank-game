@@ -35,16 +35,19 @@ public:
   void SetColor(const ci::Color& color);
   void SetDirection(const Direction& direction);
   void SetScore(const size_t& score);
+  void SetPoweredUpStatus(const bool& boolean);
   ci::Color GetColor() const;
   glm::vec2 GetPosition() const;
   size_t GetScore() const;
   Direction GetDirection() const;
+  bool GetPoweredUpStatus() const;
 
 private:
   glm::vec2 curr_position_;
   size_t score_;
   ci::Color color_;
   Direction direction_;
+  bool powered_up_;
 };
 
 } // namespace finalproject

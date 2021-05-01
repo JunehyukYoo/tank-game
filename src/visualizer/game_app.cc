@@ -116,6 +116,7 @@ void GameApp::draw() {
     //DrawTankMuzzle(red_player);
     //DrawTankMuzzle(blue_player);
     DrawWalls();
+    DrawPowerUps();
   }
 }
 
@@ -244,6 +245,17 @@ void GameApp::DrawWalls() {
       }
       //ci::gl::drawSolidRect(ci::Rectf(wall.top_left_, wall.bottom_right_));
     }
+  }
+}
+
+void GameApp::DrawPowerUps() {
+  std::vector<PowerUp> power_ups = game_status_.GetMap().GetPowerUps();
+  if (power_ups.empty()) {
+    return;
+  }
+  ci::gl::color(kPowerUpColor);
+  for (const PowerUp& power_up : power_ups) {
+    ci::gl::drawSolidCircle(power_up.GetPosition(), power_up.GetRadius());
   }
 }
 
