@@ -58,3 +58,30 @@ TEST_CASE("Test power up initialization") {
     }
   }
 }
+
+TEST_CASE("Power up pickup and shooting") {
+  finalproject::GameStatus game_status;
+  finalproject::Player& red_player = game_status.GetRedPlayer();
+  std::vector<finalproject::Bullet> bullets = game_status.GetBulletsInGame();
+  finalproject::Map map = game_status.GetMap();
+  std::vector<finalproject::PowerUp>& power_ups = map.GetPowerUps();
+ 
+  //removing randomly generated walls and power ups
+  map.RemoveWalls();
+  map.RemovePowerUps();
+  
+  finalproject::PowerUp power_up(glm::vec2(300, 300));
+  power_ups.push_back(power_up);
+  red_player.SetPosition(glm::vec2(290, 300));
+  
+  REQUIRE(red_player.GetPoweredUpStatus() == false);
+  REQUIRE(power_ups.size() == 1);
+  
+  red_player.MoveRight();
+  game_status.AdvanceOneFrame();
+  
+  SECTION("Picking up power up") {
+    REQUIRE(power_ups.size() == 0);
+    REQUIRE(red_player.GetPoweredUpStatus());
+  }
+}

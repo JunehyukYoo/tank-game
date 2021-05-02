@@ -183,7 +183,7 @@ void GameApp::keyDown(ci::app::KeyEvent event) {
       if (!red_player.GetPoweredUpStatus()) {
         game_status_.ShootBullet(red_player);
       } else {
-        game_status_.ShootPowerUpBullet(red_player);
+        game_status_.ShootPowerUpBullet(red_player); 
       }
       break;
 

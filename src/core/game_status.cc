@@ -76,14 +76,16 @@ void GameStatus::CheckBulletWallContact() {
   if (bullets_in_game_.empty() || map_.GetMapOfWallBooleans().empty()) {
     return;
   }
+
   size_t count = 0;
+  std::vector<size_t> to_remove;
   for (Bullet& bullet : bullets_in_game_) {
     glm::vec2 bullet_pos = bullet.GetPosition();
     std::pair<bool, std::pair<size_t, size_t>> result = map_.ContainsWallAtPoint(bullet_pos);
     if (result.first) {
       size_t row = result.second.first;
       size_t col = result.second.second;
-      bullets_in_game_.erase(bullets_in_game_.begin() + count);
+      to_remove.push_back(count);
       Wall& curr_wall = map_.GetWalls()[row][col];
       if (curr_wall.health_ == 1) {
         std::vector<std::vector<bool>>& bool_map = map_.GetMapOfWallBooleans();
@@ -96,6 +98,12 @@ void GameStatus::CheckBulletWallContact() {
       }
     }
     count++;
+  }
+  
+  if (!to_remove.empty()) {
+    for (size_t i = to_remove.size(); i --> 0;) {
+      bullets_in_game_.erase(bullets_in_game_.begin() + to_remove.at(i));
+    }
   }
 }
 
