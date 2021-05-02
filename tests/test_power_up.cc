@@ -2,6 +2,9 @@
 
 #include "core/game_status.h"
 #include "core/power_up.h"
+#include <cmath>
+
+#define PI 3.14159265
 
 TEST_CASE("Test power up initialization") {
   finalproject::GameStatus game_status;
@@ -62,8 +65,7 @@ TEST_CASE("Test power up initialization") {
 TEST_CASE("Power up pickup and shooting") {
   finalproject::GameStatus game_status;
   finalproject::Player& red_player = game_status.GetRedPlayer();
-  std::vector<finalproject::Bullet> bullets = game_status.GetBulletsInGame();
-  finalproject::Map map = game_status.GetMap();
+  finalproject::Map& map = game_status.GetMap();
   std::vector<finalproject::PowerUp>& power_ups = map.GetPowerUps();
  
   //removing randomly generated walls and power ups
@@ -84,4 +86,83 @@ TEST_CASE("Power up pickup and shooting") {
     REQUIRE(power_ups.size() == 0);
     REQUIRE(red_player.GetPoweredUpStatus());
   }
+}
+
+TEST_CASE("Shooting right") {
+  finalproject::GameStatus game_status;
+  finalproject::Player& red_player = game_status.GetRedPlayer();
+  finalproject::Map& map = game_status.GetMap();
+
+  //removing randomly generated walls and power ups
+  map.RemoveWalls();
+  map.RemovePowerUps();
+  
+  red_player.SetPosition(glm::vec2(300, 300));
+  game_status.ShootPowerUpBullet(red_player);
+  
+  std::vector<finalproject::Bullet> bullets = game_status.GetBulletsInGame();
+  REQUIRE(bullets.at(0).GetVelocity() == glm::vec2(6, 0));
+  REQUIRE(bullets.at(1).GetVelocity() == glm::vec2(6 * cos(PI/6), 6 * sin(PI/6)));
+  REQUIRE(bullets.at(2).GetVelocity() == glm::vec2(6 * cos(-PI/6), 6 * sin(-PI/6)));
+}
+
+TEST_CASE("Shooting left") {
+  finalproject::GameStatus game_status;
+  finalproject::Player& red_player = game_status.GetRedPlayer();
+  finalproject::Map& map = game_status.GetMap();
+
+  //removing randomly generated walls and power ups
+  map.RemoveWalls();
+  map.RemovePowerUps();
+
+  red_player.SetPosition(glm::vec2(300, 300));
+  red_player.SetDirection(finalproject::Player::LEFT);
+  game_status.ShootPowerUpBullet(red_player);
+  
+  std::vector<finalproject::Bullet> bullets = game_status.GetBulletsInGame();
+  REQUIRE(bullets.at(0).GetVelocity() == glm::vec2(-6, 0));
+  REQUIRE(bullets.at(1).GetVelocity() == glm::vec2(-6 * cos(PI/6), 6 * sin(PI/6)));
+  REQUIRE(bullets.at(2).GetVelocity() == glm::vec2(-6 * cos(-PI/6), 6 * sin(-PI/6)));
+}
+
+TEST_CASE("Shooting up") {
+  finalproject::GameStatus game_status;
+  finalproject::Player& red_player = game_status.GetRedPlayer();
+  finalproject::Map& map = game_status.GetMap();
+
+  //removing randomly generated walls and power ups
+  map.RemoveWalls();
+  map.RemovePowerUps();
+
+  red_player.SetPosition(glm::vec2(300, 300));
+  red_player.SetDirection(finalproject::Player::UP);
+  game_status.ShootPowerUpBullet(red_player);
+ 
+  std::vector<finalproject::Bullet> bullets = game_status.GetBulletsInGame();
+  REQUIRE(bullets.at(0).GetVelocity() == glm::vec2(0, -6));
+  REQUIRE(bullets.at(1).GetVelocity().x == Approx(6*sin(PI/6)).margin(0.001));
+  REQUIRE(bullets.at(1).GetVelocity().y == Approx(-6*cos(PI/6)).margin(0.001));
+  REQUIRE(bullets.at(2).GetVelocity().x == Approx(-6*sin(PI/6)).margin(0.001));
+  REQUIRE(bullets.at(2).GetVelocity().y == Approx(-6*cos(PI/6)).margin(0.001));
+}
+
+TEST_CASE("Shooting down") {
+  finalproject::GameStatus game_status;
+  finalproject::Player& red_player = game_status.GetRedPlayer();
+  finalproject::Map& map = game_status.GetMap();
+
+  //removing randomly generated walls and power ups
+  map.RemoveWalls();
+  map.RemovePowerUps();
+
+  red_player.SetPosition(glm::vec2(300, 300));
+  red_player.SetDirection(finalproject::Player::DOWN);
+  game_status.ShootPowerUpBullet(red_player);
+
+  std::vector<finalproject::Bullet> bullets = game_status.GetBulletsInGame();
+  REQUIRE(bullets.at(0).GetVelocity() == glm::vec2(0, 6));
+  REQUIRE(bullets.at(1).GetVelocity().x == Approx(-6*sin(PI/6)).margin(0.001));
+  REQUIRE(bullets.at(1).GetVelocity().y == Approx(6*cos(PI/6)).margin(0.001));
+  REQUIRE(bullets.at(2).GetVelocity().x == Approx(6*sin(PI/6)).margin(0.001));
+  REQUIRE(bullets.at(2).GetVelocity().y == Approx(6*cos(PI/6)).margin(0.001));
 }

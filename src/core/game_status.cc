@@ -154,7 +154,7 @@ void GameStatus::CheckPlayerPowerUpContact() {
   glm::vec2 red_pos = player_red_.GetPosition();
   glm::vec2 blue_pos = player_blue_.GetPosition();
   float player_radius = Player::kTankDimensions;
-  for (size_t i = 0; i < power_ups.size(); i++) {
+  for (size_t i = power_ups.size(); i --> 0;) {
     PowerUp power_up = power_ups[i];
     if (glm::distance(power_up.GetPosition(), red_pos) <= player_radius + power_up.GetRadius()) {
       player_red_.SetPoweredUpStatus(true);
