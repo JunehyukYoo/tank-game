@@ -41,7 +41,11 @@ void GameStatus::ChangeAngleOfBullet(const float &angle, glm::vec2 &original_vec
   float y = original_vector.y;
   auto magnitude = sqrt(pow(x,2) + pow(y,2));
   float altered_angle = atan(y/x) + angle;
-  original_vector = glm::vec2(magnitude * cos(altered_angle), magnitude * sin(altered_angle));
+  if (x < 0) {
+    original_vector = glm::vec2(-1 * magnitude * cos(altered_angle), magnitude * sin(altered_angle));
+  } else {
+    original_vector = glm::vec2(magnitude * cos(altered_angle), magnitude * sin(altered_angle)); 
+  }
 }
 
 void GameStatus::AdvanceOneFrame() {
