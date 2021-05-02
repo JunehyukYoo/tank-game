@@ -48,8 +48,11 @@ public:
    */
   std::pair<bool, std::pair<size_t, size_t>> ContainsWallAtPoint(const glm::vec2& position) const;
   
-  /** Method to empty vectors for testing purposes. */
-  void EmptyMap();
+  /** Method to remove walls for testing purposes. */
+  void RemoveWalls();
+  
+  /** Remove power ups for testing purposes. */
+  void RemovePowerUps();
   
   /** Getters and setters */
   std::vector<std::vector<bool>>& GetMapOfWallBooleans();

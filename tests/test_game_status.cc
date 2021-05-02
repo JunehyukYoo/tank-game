@@ -33,7 +33,7 @@ TEST_CASE("Test player movement") {
   
   //code to ignore walls
   finalproject::Map& map = game.GetMap();
-  map.EmptyMap();
+  map.RemoveWalls();
 
   REQUIRE(game.CanTankMoveInDir(red_player, finalproject::Player::DOWN));
   REQUIRE(game.CanTankMoveInDir(red_player, finalproject::Player::LEFT));
@@ -75,7 +75,7 @@ TEST_CASE("Testing bullet functionality") {
 
   //code to ignore walls
   finalproject::Map& map = game.GetMap();
-  map.EmptyMap();
+  map.RemoveWalls();
   
   SECTION("Adding/shooting bullets") {
     REQUIRE(game.GetBulletsInGame().size() == 0);

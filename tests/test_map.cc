@@ -49,7 +49,8 @@ TEST_CASE("Bullet wall collision") {
 
   //removing randomly generated walls
   finalproject::Map& map = game.GetMap();
-  map.EmptyMap();
+  map.RemoveWalls();
+  map.RemovePowerUps();
   
   //Adding in walls in top left and bottom right corners
   std::vector<std::vector<bool>>& bool_map = map.GetMapOfWallBooleans();
@@ -133,7 +134,8 @@ TEST_CASE("Player movement against walls") {
 
   //removing randomly generated walls
   finalproject::Map& map = game.GetMap();
-  map.EmptyMap();
+  map.RemoveWalls();
+  map.RemovePowerUps();
 
   //Adding in walls in top left and bottom right corners
   std::vector<std::vector<bool>>& bool_map = map.GetMapOfWallBooleans();

@@ -121,13 +121,22 @@ std::pair<bool, std::pair<size_t, size_t>> Map::ContainsWallAtPoint(const glm::v
   return {false, {0,0}};
 }
 
-void Map::EmptyMap() {
+void Map::RemoveWalls() {
   for (size_t row = 0; row < contains_walls_.size(); row++) {
     for (size_t col = 0; col < contains_walls_[0].size(); col++) {
       contains_walls_[row][col] = false;
       walls_in_map_[row][col].health_ = 0;
       walls_in_map_[row][col].top_left_ = glm::vec2(0, 0);
       walls_in_map_[row][col].bottom_right_ = glm::vec2(0, 0);
+    }
+  }
+}
+
+void Map::RemovePowerUps() {
+  power_ups_in_map.clear();
+  for (size_t row = 0; row < contains_power_ups_.size(); row++) {
+    for (size_t col = 0; col < contains_power_ups_[0].size(); row++) {
+      contains_power_ups_[row][col] = false;
     }
   }
 }
